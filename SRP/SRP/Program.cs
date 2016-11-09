@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 namespace SRP
 {
 
-    class Program
+    class Studieretningsproject
     {
 
         static void Main( string[] args )
@@ -24,10 +24,13 @@ namespace SRP
                      x ++ )
             {
 
+                
+
             }
 
 
         }
 
     }
+
 }
