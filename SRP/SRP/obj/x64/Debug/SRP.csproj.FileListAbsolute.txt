@@ -1,6 +1,8 @@
 C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\SRP\obj\x64\Debug\SRP.csprojResolveAssemblyReference.cache
-C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\SRP\bin\x64\Debug\Program.exe.config
-C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\SRP\bin\x64\Debug\Program.exe
-C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\SRP\bin\x64\Debug\Program.pdb
-C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\SRP\obj\x64\Debug\Program.exe
-C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\SRP\obj\x64\Debug\Program.pdb
+C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\SRP\bin\x64\Debug\naive.exe.config
+C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\SRP\bin\x64\Debug\naive.exe
+C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\SRP\bin\x64\Debug\naive.pdb
+C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\SRP\obj\x64\Debug\naive.exe
+C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\SRP\obj\x64\Debug\naive.pdb
+C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\SRP\bin\x64\Debug\program.exe.config
+C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\SRP\bin\x64\Debug\srp.exe.config

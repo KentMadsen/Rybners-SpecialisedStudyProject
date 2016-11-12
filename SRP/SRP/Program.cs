@@ -10,25 +10,58 @@ using System.Threading.Tasks;
 // Name   : Tekst Klassificering, Text Classifying
 // Note   : Rewritten
 
-namespace SRP
+
+// Naive Insert Document
+namespace Studieretningsproject
 {
 
-    class Studieretningsproject
+    class Program
     {
+        static Commands command;
+
+        static Boolean Activate = false;
 
         static void Main( string[] args )
         {
-            
-            for( int x = 0; 
-                     x <= args.Length - 1; 
-                     x ++ )
+            Initialise( args );
+
+            Run();
+
+            Clean();
+        }
+
+        static void Initialise( string[] arguments )
+        {
+            switch( arguments[0] )
             {
+            case "predict":
+                    Predict predict = new Predict();
+                    predict.Initialise( arguments );
 
-                
+                    break;
 
+            case "train":
+                    Train train = new Train();
+                    train.Initialise( arguments );
+
+                break;
+
+            default: 
+
+                break;
             }
+        }
 
+        static void Run()
+        {
+            if ( Activate == true )
+                command.Run();
 
+        }
+
+        static void Clean()
+        {
+            command.Clean();
         }
 
     }
