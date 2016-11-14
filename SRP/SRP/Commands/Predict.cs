@@ -20,9 +20,22 @@ namespace Studieretningsproject
             {
                 string[] parameter = Parameterise( Arguments[x] );
 
-                Parameters( parameter[0], 
-                            parameter[1] );
+                if( parameter == null )
+                {
+                    // Command
+
+                }
+                else
+                {
+                    Parameters( parameter[0], 
+                                parameter[1] );
+                }
             }
+
+        }
+
+        protected override void Commands( string s )
+        {
 
         }
 
