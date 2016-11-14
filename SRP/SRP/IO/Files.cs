@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 
-namespace Studieretningsproject
+namespace Studieretningsproject.IO
 {
-    public class IO
+    public class Files
     {
 
         public static bool createDirectory( String path )

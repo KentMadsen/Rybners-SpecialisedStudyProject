@@ -13,6 +13,22 @@ namespace Studieretningsproject
 
         }
 
+        protected string[] Parameterise( string Parameter )
+        {
+            string[] retValue;
+
+            if( Parameter.Contains( '=' ) )
+            {
+                retValue = Parameter.Split( '=' );
+            }
+            else
+            {
+                retValue = null;
+            }
+
+            return retValue;
+        }
+
         public abstract void Initialise(string[] Arguments);
         public abstract void Run();
         public abstract void Clean();

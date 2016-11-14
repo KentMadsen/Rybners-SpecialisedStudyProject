@@ -4,9 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Studieretningsproject.Type
+namespace Studieretningsproject.Database
 {
-    class NaiveBayes
+    public static class Sql
     {
+        static string Insert;
+
+        static string Select;
     }
 }

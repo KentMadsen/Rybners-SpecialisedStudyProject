@@ -16,7 +16,7 @@ namespace SRP
     class Interface
     {
         public bool safe = true;
-        
+
 
         virtual public void run()
         {
@@ -24,7 +24,7 @@ namespace SRP
             Console.WriteLine( "Interface: Empty" );
 
         }
-        
+
     }
 
     class Naive:Interface
@@ -34,20 +34,20 @@ namespace SRP
         private string programFolder;
         private string databaseName;
         private string connectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data ";
-        
-        
+
+
         // Thread Variables
         public int Done = 0;
 
 
 
-        public Naive( String ProgramFolder, 
+        public Naive( String ProgramFolder,
                       String DatabaseName )
         {
             programFolder = ProgramFolder;
             databaseName = DatabaseName;
         }
-        
+
         private int Initialise()
         {
             if( Directory.Exists( programFolder + @"\target" ) )
@@ -58,7 +58,7 @@ namespace SRP
             else
             {
                 try
-                { 
+                {
                     Directory.CreateDirectory( programFolder + @"\target" );
                     return 0;
                 }
@@ -68,7 +68,7 @@ namespace SRP
                     return -1;
                 }
             }
-            
+
         }
 
         string Filter( string input )
@@ -76,7 +76,7 @@ namespace SRP
             // Copypasted fra Functions.cs linje 210
             string result;
             StringBuilder SB = new StringBuilder();
-            
+
             foreach( char c in input.ToLower() )
             {
                 if( c >= '0' && c <= '9' )
@@ -123,13 +123,13 @@ namespace SRP
             Sorted.Add( t[0] );
 
             // Finder gentagelser
-            for( int x = 0; 
-                     x <= t.Length - 1; 
+            for( int x = 0;
+                     x <= t.Length - 1;
                      x ++ )
             {
 
                 Sorted.Add(t[x]);
-                
+
             }
 
             string[] t_result = Sorted.ToArray();
@@ -142,8 +142,9 @@ namespace SRP
 
         // Beregninger
         // Laplace smoothing https://class.coursera.org/nlp/lecture/26
-        // Input er : Count (W_i, c) + 1 og Count(w, c) + |v|. |v| = vocabalary, størelsen på dets "ord forråd"
-        private float smoothing( int ValA, int ValB, 
+        // Input er : Count (W_i, c) + 1 og (Count(w, c) + |v|).
+        // |v| = vocabalary, størelsen på dets "ord forråd"
+        private float smoothing( int ValA, int ValB,
                                  int v )
         {
             if( v == 0 )
@@ -189,7 +190,7 @@ namespace SRP
             return DocumentIDs;
         }
 
-        // Henter en ordlist og samler det sammen til en stor array. 
+        // Henter en ordlist og samler det sammen til en stor array.
         private List<string> GetMegaDocument( List<int> DocumentIDs)
         {
             List<string> MegaDocument = new List<string>();
@@ -208,12 +209,12 @@ namespace SRP
                                                            DocumentIDs[x] );
 
                     DataRow[] Rows = Words.Select( DocumentFilter );
-                    
+
                     foreach ( DataRow r in Rows )
                     {
-                       
+
                       MegaDocument.Add( (string) r["Val"]);
-                        
+
                     }
 
 
@@ -227,7 +228,7 @@ namespace SRP
                 Console.WriteLine(e);
                 return null;
             }
-            
+
         }
 
         private int TotalDocuments()
@@ -253,7 +254,7 @@ namespace SRP
                 Console.WriteLine(e);
 
             }
-            
+
             return 0;
         }
 
@@ -276,7 +277,7 @@ namespace SRP
             return result;
         }
 
-        private float k( List<string> Tokens, 
+        private float k( List<string> Tokens,
                          int Category )
         {
 
@@ -289,14 +290,14 @@ namespace SRP
 
 
             //Totale antal dokumenter træningssættet (under kategorien) plus det vi læser
-            float cj = prior( getCategoryCount(Category), 
+            float cj = prior( getCategoryCount(Category),
                               TotalDocuments() );
 
             Console.WriteLine("[Test Specifics -----------------------------]");
 
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine( " [IDS, Prior] : Count:{0}, {1}", 
-                                DocumentIDs.Count, 
+            Console.WriteLine( " [IDS, Prior] : Count:{0}, {1}",
+                                DocumentIDs.Count,
                                 cj );
 
             Console.ForegroundColor = ConsoleColor.White;
@@ -305,7 +306,7 @@ namespace SRP
             List < string > MegaDocument = GetMegaDocument( DocumentIDs );
             List < string > Temp = new List<string>();
             List<string> Vocabalary = new List<string>();
-            
+
             DataTable Words = DataBank.Tables["Words"];
             DataRow[] r = Words.Select();
 
@@ -315,8 +316,8 @@ namespace SRP
             }
 
             // Får fat på Vocabalary Size
-            for ( int i = 0; 
-                     i <= Vocabalary.Count - 1; 
+            for ( int i = 0;
+                     i <= Vocabalary.Count - 1;
                      i ++ )
             {
                 if( i == 0 )
@@ -326,8 +327,8 @@ namespace SRP
 
                 bool exist = false;
 
-                for( int j = 0; 
-                         j <= Temp.Count -1; 
+                for( int j = 0;
+                         j <= Temp.Count -1;
                          j ++ )
                 {
                     if( Vocabalary[i] == Temp[j] )
@@ -343,19 +344,19 @@ namespace SRP
                 }
 
             }
-            
+
             int v = Temp.Count;
-            
+
             // Frekvensen
-            for ( int i = 0; 
-                     i <= Tokens.Count - 1; 
+            for ( int i = 0;
+                     i <= Tokens.Count - 1;
                      i ++ )
             {
                 int freq = 0;
 
                 // Køre igennem tokens
-                for( int j = 0; 
-                         j <= MegaDocument.Count - 1; 
+                for( int j = 0;
+                         j <= MegaDocument.Count - 1;
                          j ++ )
                 {
                     if( Tokens[i] == MegaDocument[j] )
@@ -363,29 +364,29 @@ namespace SRP
                         freq = freq + 1;
                     }
                 }
-                
+
                 Frequency.Add( freq );
             }
-            
+
             // First
-            for( int i = 0; 
-                     i <= Frequency.Count -1; 
+            for( int i = 0;
+                     i <= Frequency.Count -1;
                      i ++ )
             {
-                float result = smoothing( Frequency[i], 
+                float result = smoothing( Frequency[i],
                                           MegaDocument.Count, v );
-                
+
                 CalculationResult.Add( result );
             }
 
-            
+
             float FinalResult =  0.0f;
 
-            for( int i = 0; 
-                     i <= CalculationResult.Count - 1; 
+            for( int i = 0;
+                     i <= CalculationResult.Count - 1;
                      i ++ )
             {
-                
+
                 FinalResult = FinalResult + (float)Math.Log(CalculationResult[i]);
             }
 
@@ -401,12 +402,12 @@ namespace SRP
         {
             slaveThread = new System.Threading.Thread( NaiveBayes );
             slaveThread.Start();
-            
-            Console.WriteLine( "[Thread]: {0} started", 
+
+            Console.WriteLine( "[Thread]: {0} started",
                                slaveThread.ManagedThreadId );
-            
+
         }
-        
+
         // resultaterne gemmes
         public struct blackbox
         {
@@ -454,17 +455,17 @@ namespace SRP
             // Filling Data
             OleDbDataAdapter ODDA = new OleDbDataAdapter( String.Format( Query, "Document" ),
                                                           Connection );
-            ODDA.Fill( DataBank, 
+            ODDA.Fill( DataBank,
                        "Document" );
 
-            ODDA.SelectCommand.CommandText = string.Format( Query, 
+            ODDA.SelectCommand.CommandText = string.Format( Query,
                                                             "Category" );
-            ODDA.Fill( DataBank, 
+            ODDA.Fill( DataBank,
                       "Category" );
 
-            ODDA.SelectCommand.CommandText = string.Format( Query, 
+            ODDA.SelectCommand.CommandText = string.Format( Query,
                                                             "Words" );
-            ODDA.Fill( DataBank, 
+            ODDA.Fill( DataBank,
                        "Words" );
 
             // lukker forbindelsen
@@ -482,12 +483,12 @@ namespace SRP
 
             // Navne på alle filerne i mappen
             FileDirectories = Directory.GetFiles( programFolder + @"\target" );
-            
+
 
             foreach ( string s in FileDirectories )
             {
                 // Fortæller brugeren hvad den arbejder med
-                Console.WriteLine( " [Processing]: {0}", 
+                Console.WriteLine( " [Processing]: {0}",
                                    s );
 
                 // Henter Target Dokumenterne
@@ -504,8 +505,8 @@ namespace SRP
 
                 List<blackbox> resultater = new List<blackbox>();
 
-                for ( int x = 0; 
-                          x <= Tokens.Length -1; 
+                for ( int x = 0;
+                          x <= Tokens.Length -1;
                           x ++ )
                 {
                     TokensList.Add( Tokens[x] );
@@ -513,7 +514,7 @@ namespace SRP
 
                 // Fjerne empty space og null
                 TokensList.RemoveAll( String.IsNullOrWhiteSpace );
-                
+
                 DataTable Docs = DataBank.Tables["Category"];
                 DataRow[] Rows = Docs.Select();
 
@@ -533,18 +534,17 @@ namespace SRP
                                        bb.Result,
                                        bb.CategoryName);
                 }
-                
+
             }
 
             exit:
             // Output Result
             Console.WriteLine(" [Naive Bayes]: Exits Threads ");
-            
+
             // Output Data
             Done = 1;
         }
-      
+
     }
 
 }
-

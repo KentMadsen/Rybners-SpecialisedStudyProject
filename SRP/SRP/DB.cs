@@ -4,9 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Studieretningsproject.Type
+namespace Studieretningsproject
 {
-    class NaiveBayes
+    class DB
     {
+        public DB()
+        {
+
+        }
+
     }
 }

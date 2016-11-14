@@ -101,7 +101,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Commands\Commands.cs" />
-    <Compile Include="IO.cs" />
+    <Compile Include="DB.cs" />
+    <Compile Include="Database\Sql.cs" />
+    <Compile Include="IO\Files.cs" />
+    <Compile Include="Math\Functions.cs" />
+    <Compile Include="Math\NaiveBayes.cs" />
     <Compile Include="Type\NaiveBayes.cs" />
     <Compile Include="Commands\Predict.cs" />
     <Compile Include="Program.cs" />
