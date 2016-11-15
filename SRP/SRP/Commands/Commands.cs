@@ -29,9 +29,9 @@ namespace Studieretningsproject
             return retValue;
         }
 
-        protected abstract void Commands(string arg);
+        protected abstract void ExecuteOrder( string input );
 
-        public abstract void Initialise(string[] Arguments);
+        public abstract void Initialise( string[] Arguments );
         public abstract void Run();
         public abstract void Clean();
         

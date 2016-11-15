@@ -8,6 +8,9 @@ namespace Studieretningsproject
 {
     class Predict : Commands
     {
+        // Command Word
+        public const string CommandValue = "predict";
+
         public override void Initialise( string[] Arguments )
         {
 
@@ -34,7 +37,7 @@ namespace Studieretningsproject
 
         }
 
-        protected override void Commands( string s )
+        protected override void ExecuteOrder( string s )
         {
 
         }

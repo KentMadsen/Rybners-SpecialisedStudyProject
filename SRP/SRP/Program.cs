@@ -25,39 +25,55 @@ namespace Studieretningsproject
     class Program
     {
 
-        static Commands command;
+        static Commands command = null;
 
         static Boolean Activate = false;
+        static FileReadManager Reader;
 
-        static void Main( string[] args )
+        static void Main( string[] Arguments )
         {
-            Initialise( args );
+            Reader = new FileReadManager();
 
+            // Initialise Command
+            Initialise( Arguments );
+
+            // If nothing is chosen, exit.
+            if ( command == null )
+            {
+                // Exit
+                return;
+            }
+
+            // Run chosen command
             Run();
 
+            // Clean Exit
             Clean();
         }
 
-        static void Initialise( string[] arguments )
+        static void Initialise( string[] Arguments )
         {
-            switch( arguments[0] )
-            {
-            case "predict":
-                    Predict predict = new Predict();
-                    predict.Initialise( arguments );
 
+            if ( Arguments.Length == 0 )
+                return;
+
+            switch( Arguments[0] )
+            {
+                case Predict.CommandValue:
+                        Predict predict = new Predict();
+                        predict.Initialise( Arguments );
                     break;
 
-            case "train":
-                    Train train = new Train();
-                    train.Initialise( arguments );
+                case Train.CommandValue:
+                        Train train = new Train();
+                        train.Initialise( Arguments );
+                    break;
 
-                break;
+                default: 
 
-            default: 
-
-                break;
+                    break;
             }
+
         }
 
         static void Run()
