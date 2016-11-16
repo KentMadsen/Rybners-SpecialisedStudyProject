@@ -4,10 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Studieretningsproject
+namespace Studieretningsproject.Orders
 {
     class Train : Commands
     {
+        public Train()
+        {
+
+        }
+
         // Command Word
         public const string CommandValue = "train";
 

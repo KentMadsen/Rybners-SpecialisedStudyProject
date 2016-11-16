@@ -4,15 +4,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Studieretningsproject
+namespace Studieretningsproject.Orders
 {
     class Predict : Commands
     {
+        public Predict()
+        {
+            
+        }
+
         // Command Word
         public const string CommandValue = "predict";
 
+        //
         public override void Initialise( string[] Arguments )
         {
+            Console.WriteLine( "Predict: Initialise" );
 
             if ( Arguments.Length == 1 )
                 return;
@@ -21,7 +28,7 @@ namespace Studieretningsproject
                       x <= Arguments.Length - 1;
                       x ++ )
             {
-                string[] parameter = Parameterise( Arguments[x] );
+                string[] parameter = Parameterise( Arguments[x].ToLower() );
 
                 if( parameter == null )
                 {
@@ -30,22 +37,30 @@ namespace Studieretningsproject
                 }
                 else
                 {
-                    Parameters( parameter[0], 
-                                parameter[1] );
+                    Parameters( parameter[0].ToLower(), 
+                                parameter[1].ToLower() );
                 }
+
             }
 
-        }
+        } // Initialise
 
-        protected override void ExecuteOrder( string s )
+        protected override void ExecuteOrder( string instruction )
         {
+            Console.WriteLine( "Predict: Parameters [{0}]", 
+                               instruction );
 
-        }
+        } // ExecuteOrder
 
         private void Parameters( string Identifier, 
                                  string Value )
         {
-            switch( Identifier )
+
+            Console.WriteLine( "Predict: Parameters [{0}, {1}]", 
+                               Identifier, 
+                               Value );
+
+            switch ( Identifier )
             {
 
 
@@ -53,17 +68,18 @@ namespace Studieretningsproject
 
                     break;
             }
-        }
+        } // Parameters
 
         public override void Run()
         {
-            
-        }
+            Console.WriteLine( "Predict: Run" );
+
+        } // Run
 
         public override void Clean()
         {
-            
-        }
+            Console.WriteLine( "Predict: Clean" );
+        } // Clean
 
     } // End Class
 

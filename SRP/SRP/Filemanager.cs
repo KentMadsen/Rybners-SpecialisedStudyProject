@@ -33,7 +33,12 @@ namespace Studieretningsproject
 
         // Variables
         private Thread threadWorker;
-        private bool threadAlive = false;
+
+        private bool threadAlive
+        {
+            get;
+            set;
+        }
 
         private int InternalIterator = 0;
 
@@ -72,62 +77,75 @@ namespace Studieretningsproject
         {
             foreach( Complete_Element f in ContentList )
             {
+
                 if( f.Objects.Identifier == id )
                 {
                     return f.Data.ToArray();
                 }
+
             }
+
             return null;
         }
 
+        // Thread
         public void Worker()
         {
-            Console.WriteLine( "Worker: " + System.Threading.Thread.CurrentThread );
+
+            Console.WriteLine( "Worker: " + 
+                                Thread.CurrentThread );
 
             threadAlive = true;
 
             int sleep_iterator = 0;
+            int sleep_rotation = 0;
 
             bool Continue = true;
 
             while( Continue )
             {
-                bool work = true;
                 bool skip = false;
 
                 if( QueueList.Count == 0 )
                 {
-                    work = false;
                     skip = true;
                 }
 
                 if( skip == false )
                 {
                     sleep_iterator = 0;
+                    sleep_rotation = 0;
 
                     try
                     {
-                        Element input = QueueList[0];
+                        Element input = RetrieveObject();
                         RemoveObject();
 
                         Byte[] data = System.IO.File.ReadAllBytes( input.Directory );
 
-                        AddContentObject( input, 
-                                          data );
+                        AddContentObject( input, data );
 
                     }
                     catch( Exception ie )
                     {
-
+                        Console.WriteLine( "Error" );
                     }
 
                 }
 
-                if ( work == false )
+                if ( skip == true )
                 {
-                    sleep_iterator++;
+                    if( sleep_rotation < 50 )
+                    {
+                        sleep_rotation ++;
+                    }
 
-                    Thread.Sleep( 50 );
+                    if( sleep_rotation == 50 )
+                    {
+                        sleep_iterator++;
+
+                        Thread.Sleep( 50 );
+                    }
                 }
 
                 if ( sleep_iterator == 100 )
@@ -140,10 +158,15 @@ namespace Studieretningsproject
             threadAlive = false;
         } // End Worker
 
+        private Element RetrieveObject()
+        {
+            return QueueList[ 0 ];
+        } // End Retrieve
+
         private void RemoveObject()
         {
             QueueList.RemoveAt( 0 );
-        }
+        } // End RemoveObject
 
         private void AddContentObject( Element IN_E, 
                                        byte[] Data )
@@ -154,7 +177,7 @@ namespace Studieretningsproject
             retValue.Data = Data;
 
             ContentList.Add( retValue );
-        }
+        } // End AddContentObject
 
     } // end Filemanager
 
