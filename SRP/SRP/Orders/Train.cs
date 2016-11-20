@@ -6,8 +6,20 @@ using System.Threading.Tasks;
 
 namespace Studieretningsproject.Orders
 {
+
     class Train : Commands
     {
+
+        enum Modes
+        {
+            Train,
+            Filter,
+            None
+        }
+
+        private Modes Set;
+        private bool CommandIssued = false;
+
         public Train()
         {
 
@@ -16,10 +28,11 @@ namespace Studieretningsproject.Orders
         // Command Word
         public const string CommandValue = "train";
 
-        FileReadManager fManager = new FileReadManager();
-
+        // ----------------------------------------------------------------------------------- //
         public override void Initialise( string[] Arguments )
         {
+            Console.WriteLine( "Train : Initialise" );
+
             if ( Arguments.Length == 1 )
                 return;
 
@@ -44,35 +57,49 @@ namespace Studieretningsproject.Orders
 
         } // End Initialise
 
-        // What to do,
+        // What to do
         protected override void ExecuteOrder( string Identifier )
         {
-            switch( Identifier )
+            Console.WriteLine( "Train : ExecuteOrder" );
+
+            if( CommandIssued == false )
             {
-                case "":
 
-                    break;
+                switch( Identifier )
+                {
+                    // train
+                    case "run":
+                            Set = Modes.Train;
+                        break;
 
-                default:
+                    // upload filter words
+                    case "train-filter":
+                            Set = Modes.Filter;
+                        break;
+                        
+                    // doing nothing
+                    default:
+                            Set = Modes.None;
+                        break;
+                }
 
-                    break;
+                CommandIssued = true;
             }
+
         } // End Order
 
         // Parameters
         private void Parameters( string Identifier, 
                                  string Value )
         {
+            Console.WriteLine( "Train : Parameters" );
+
             switch( Identifier )
             {
                 case "":
 
                     break;
-
-                case " ":
-
-                    break;
-
+                    
                 default:
 
                     break;
@@ -80,14 +107,43 @@ namespace Studieretningsproject.Orders
 
         } // End Parameters
 
+        // ----------------------------------------------------------------------------------- //
         public override void Run()
         {
+            Console.WriteLine( "Train : Run" );
+
+            switch( Set )
+            {
+                case Modes.Filter:
+                        MFilter();
+                    break;
+
+                case Modes.Train:
+                        MTrain();
+                    break;
+
+                case Modes.None:
+                        // What it says on package
+                    break;
+            }
 
         } // End Run
 
+        private void MFilter()
+        {
 
+        }
+
+        private void MTrain()
+        {
+
+        }
+
+
+        // ----------------------------------------------------------------------------------- //
         public override void Clean()
         {
+            Console.WriteLine( "Train: Clean" );
 
         } // End Clean
 

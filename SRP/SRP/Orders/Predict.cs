@@ -57,8 +57,7 @@ namespace Studieretningsproject.Orders
         {
 
             Console.WriteLine( "Predict: Parameters [{0}, {1}]", 
-                               Identifier, 
-                               Value );
+                               Identifier, Value );
 
             switch ( Identifier )
             {
@@ -68,6 +67,7 @@ namespace Studieretningsproject.Orders
 
                     break;
             }
+
         } // Parameters
 
         public override void Run()

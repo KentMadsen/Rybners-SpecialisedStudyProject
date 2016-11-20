@@ -27,17 +27,16 @@ namespace Studieretningsproject
         static Orders.Commands Command;
 
         static Boolean CommandEmpty = false;
-
         static Boolean DebugBreak   = true;
-        static Boolean Activate     = false;
         
         static void Main( string[] Arguments )
         {
-            Console.WriteLine("-Studieretnings Project : Naive Bayes ---------------------------------------------------------------------------------");
-
+            Console.Write("|Studieretnings Project : Naive Bayes ---------------------------------------------------------------------------------|");
+            
             foreach( String s in Arguments )
             {
-                Console.WriteLine( "Argument : {0}", s );
+                Console.WriteLine( "Argument : {0}", 
+                                    s );
             }
             
             // Initialise Command
@@ -108,9 +107,8 @@ namespace Studieretningsproject
         //
         static void Run()
         {
-            if ( Activate == true )
+            if ( CommandEmpty == false )
                 Command.Run();
-
         } // End Run()
 
         //
@@ -121,13 +119,12 @@ namespace Studieretningsproject
 
         static void DebugBreakpoint()
         {
-
             if ( DebugBreak == true )
             {
                 Console.WriteLine( "Click a key, to continue the process" );
+
                 Console.ReadKey();
             }
-
         } // End DebugBreakpoint()
 
     } // End Class Program

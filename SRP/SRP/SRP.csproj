@@ -101,14 +101,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Orders\Calculate.cs" />
     <Compile Include="Orders\Commands.cs" />
     <Compile Include="Orders\Tools.cs" />
-    <Compile Include="Database\Sql.cs" />
-    <Compile Include="Filemanager.cs" />
+    <Compile Include="Database\SQL.cs" />
     <Compile Include="IO\Files.cs" />
     <Compile Include="IO\Hash.cs" />
     <Compile Include="Math\Functions.cs" />
-    <Compile Include="Math\NaiveBayes.cs" />
     <Compile Include="Type\NaiveBayes.cs" />
     <Compile Include="Orders\Predict.cs" />
     <Compile Include="Program.cs" />

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Studieretningsproject.Database
 {
-    public static class Sql
+    public static class SQL
     {
         static string Insert;
 
