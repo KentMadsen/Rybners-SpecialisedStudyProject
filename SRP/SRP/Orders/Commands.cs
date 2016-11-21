@@ -7,23 +7,7 @@ using System.Threading.Tasks;
 namespace Studieretningsproject.Orders
 {
     public abstract class Commands
-    {
-        protected string[] Parameterise( string Parameter )
-        {
-            string[] retValue;
-
-            if( Parameter.Contains( '=' ) )
-            {
-                retValue = Parameter.Split( '=' );
-            }
-            else
-            {
-                retValue = null;
-            }
-
-            return retValue;
-        }
-        
+    {   
         public abstract void Initialise( string[] Arguments );
 
         public abstract void Run();

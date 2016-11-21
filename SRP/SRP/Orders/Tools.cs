@@ -18,15 +18,7 @@ namespace Studieretningsproject.Orders
         {
             if ( Arguments.Length == 1 )
                 return;
-
-            for( int x = 0; 
-                     x <= Arguments.Length - 1; 
-                     x ++ )
-            {
-                string[] parameter = Parameterise( Arguments[x] );
-                
-            }
-
+            
         }
         
         
