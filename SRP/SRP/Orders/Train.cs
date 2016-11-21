@@ -9,6 +9,7 @@ namespace Studieretningsproject.Orders
 
     class Train : Commands
     {
+
         public const string CommandValue = "train";
 
         public Train()
@@ -17,10 +18,10 @@ namespace Studieretningsproject.Orders
         }
 
         // ----------------------------------------------------------------------------------- //
-        public override void Initialise( string[] Arguments )
+        public override void Initialise(  )
         {
-            if ( Arguments.Length == 1 )
-                return;
+
+
             
         } // End Initialise
 

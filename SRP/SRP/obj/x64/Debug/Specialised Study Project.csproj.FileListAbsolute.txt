@@ -1,0 +1,6 @@
+C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\SRP\bin\x64\Debug\SSP.exe.config
+C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\SRP\bin\x64\Debug\SSP.exe
+C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\SRP\bin\x64\Debug\SSP.pdb
+C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\SRP\obj\x64\Debug\Specialised Study Project.csprojResolveAssemblyReference.cache
+C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\SRP\obj\x64\Debug\SSP.exe
+C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\SRP\obj\x64\Debug\SSP.pdb

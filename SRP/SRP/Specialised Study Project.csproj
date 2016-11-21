@@ -101,13 +101,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IO\Database.cs" />
-    <Compile Include="IO\Strings.cs" />
+    <Compile Include="General.cs" />
     <Compile Include="Orders\Commands.cs" />
-    <Compile Include="Orders\Tools.cs" />
-    <Compile Include="IO\Files.cs" />
-    <Compile Include="IO\Hash.cs" />
-    <Compile Include="Math\Functions.cs" />
     <Compile Include="Orders\Predict.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

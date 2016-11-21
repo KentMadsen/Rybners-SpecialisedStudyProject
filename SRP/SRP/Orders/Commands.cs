@@ -8,7 +8,7 @@ namespace Studieretningsproject.Orders
 {
     public abstract class Commands
     {   
-        public abstract void Initialise( string[] Arguments );
+        public abstract void Initialise(  );
 
         public abstract void Run();
 

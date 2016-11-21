@@ -9,17 +9,16 @@ namespace Studieretningsproject.Orders
     class Predict : Commands
     {
         public const string CommandValue = "predict";
-
+        
         public Predict()
         {
             
         }
         
         //
-        public override void Initialise( string[] Arguments )
+        public override void Initialise(  )
         {
-            if ( Arguments.Length == 1 )
-                return;
+
 
 
 
