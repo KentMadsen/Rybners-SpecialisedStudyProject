@@ -27,11 +27,9 @@ namespace Studieretningsproject
     class Program
     {
         static Orders.Commands Command;
-        static ArgParser Parser;
-
+        
         static void Main( string[] Arguments )
-        {
-            Parser = new ArgParser( Arguments );  
+        { 
 
             // Initialise Command
             Initialise( );
