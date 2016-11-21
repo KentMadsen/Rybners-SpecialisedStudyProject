@@ -101,6 +101,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IO\Characters.cs" />
+    <Compile Include="IO\Database.cs" />
+    <Compile Include="IO\Strings.cs" />
     <Compile Include="Orders\Commands.cs" />
     <Compile Include="Orders\Tools.cs" />
     <Compile Include="IO\Files.cs" />

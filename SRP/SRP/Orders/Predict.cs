@@ -45,12 +45,6 @@ namespace Studieretningsproject.Orders
 
         } // Initialise
 
-        protected override void ExecuteOrder( string instruction )
-        {
-            Console.WriteLine( "Predict: Parameters [{0}]", 
-                               instruction );
-
-        } // ExecuteOrder
 
         private void Parameters( string Identifier, 
                                  string Value )

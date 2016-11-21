@@ -23,9 +23,7 @@ namespace Studieretningsproject.Orders
 
             return retValue;
         }
-
-        protected abstract void ExecuteOrder( string input );
-
+        
         public abstract void Initialise( string[] Arguments );
 
         public abstract void Run();

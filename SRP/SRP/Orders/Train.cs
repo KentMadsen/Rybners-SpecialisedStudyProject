@@ -42,51 +42,12 @@ namespace Studieretningsproject.Orders
             {
                 string[] parameter = Parameterise( Arguments[x] );
 
-                if( parameter.Length == 0 )
-                {
-                    // Command
-                    ExecuteOrder( Arguments[x] );
-                }
-                else
-                {
-                    Parameters( parameter[0], 
-                                parameter[1] );
-                }
 
             }
 
         } // End Initialise
 
-        // What to do
-        protected override void ExecuteOrder( string Identifier )
-        {
-            Console.WriteLine( "Train : ExecuteOrder" );
-
-            if( CommandIssued == false )
-            {
-
-                switch( Identifier )
-                {
-                    // train
-                    case "run":
-                            Set = Modes.Train;
-                        break;
-
-                    // upload filter words
-                    case "train-filter":
-                            Set = Modes.Filter;
-                        break;
-                        
-                    // doing nothing
-                    default:
-                            Set = Modes.None;
-                        break;
-                }
-
-                CommandIssued = true;
-            }
-
-        } // End Order
+  
 
         // Parameters
         private void Parameters( string Identifier, 
