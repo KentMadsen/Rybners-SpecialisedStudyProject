@@ -5,6 +5,10 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Specialised Study Project", "SRP\Specialised Study Project.csproj", "{9CFCFFE4-9350-4B0B-BD24-70388EBE07EC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Machine Learning", "Machine Learning\Machine Learning.csproj", "{BB988E60-F87D-43DC-896A-2B0DA6D0BC3D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Database", "Database\Database.csproj", "{5BF815DA-C661-445F-B790-207B4BB133B6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,22 @@ Global
 		{9CFCFFE4-9350-4B0B-BD24-70388EBE07EC}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9CFCFFE4-9350-4B0B-BD24-70388EBE07EC}.Release|x64.ActiveCfg = Release|x64
 		{9CFCFFE4-9350-4B0B-BD24-70388EBE07EC}.Release|x64.Build.0 = Release|x64
+		{BB988E60-F87D-43DC-896A-2B0DA6D0BC3D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB988E60-F87D-43DC-896A-2B0DA6D0BC3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB988E60-F87D-43DC-896A-2B0DA6D0BC3D}.Debug|x64.ActiveCfg = Debug|x64
+		{BB988E60-F87D-43DC-896A-2B0DA6D0BC3D}.Debug|x64.Build.0 = Debug|x64
+		{BB988E60-F87D-43DC-896A-2B0DA6D0BC3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB988E60-F87D-43DC-896A-2B0DA6D0BC3D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BB988E60-F87D-43DC-896A-2B0DA6D0BC3D}.Release|x64.ActiveCfg = Release|Any CPU
+		{BB988E60-F87D-43DC-896A-2B0DA6D0BC3D}.Release|x64.Build.0 = Release|Any CPU
+		{5BF815DA-C661-445F-B790-207B4BB133B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5BF815DA-C661-445F-B790-207B4BB133B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5BF815DA-C661-445F-B790-207B4BB133B6}.Debug|x64.ActiveCfg = Debug|x64
+		{5BF815DA-C661-445F-B790-207B4BB133B6}.Debug|x64.Build.0 = Debug|x64
+		{5BF815DA-C661-445F-B790-207B4BB133B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5BF815DA-C661-445F-B790-207B4BB133B6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5BF815DA-C661-445F-B790-207B4BB133B6}.Release|x64.ActiveCfg = Release|Any CPU
+		{5BF815DA-C661-445F-B790-207B4BB133B6}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

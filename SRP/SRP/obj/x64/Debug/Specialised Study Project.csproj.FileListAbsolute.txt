@@ -4,3 +4,7 @@ C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\SRP\bin\x64\Debug\SSP.pdb
 C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\SRP\obj\x64\Debug\Specialised Study Project.csprojResolveAssemblyReference.cache
 C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\SRP\obj\x64\Debug\SSP.exe
 C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\SRP\obj\x64\Debug\SSP.pdb
+C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\SRP\bin\x64\Debug\Database.dll
+C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\SRP\bin\x64\Debug\Machine Learning.dll
+C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\SRP\bin\x64\Debug\Database.pdb
+C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\SRP\bin\x64\Debug\Machine Learning.pdb

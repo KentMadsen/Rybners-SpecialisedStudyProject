@@ -4,8 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using Parser;
-
 /* 
    Author  : Kent vejrup Madsen
   
@@ -27,18 +25,33 @@ namespace Studieretningsproject
     class Program
     {
         static Orders.Commands Command;
-        
+
+        static bool Continue = true;
+
         static void Main( string[] Arguments )
-        { 
+        {
+            // Initialise
 
-            // Initialise Command
-            Initialise( );
-            
-            // Run chosen command
-            Run();
+            // 
+            while( Continue )
+            {
+                // Get Input
+                string Command;
+                Command = Console.ReadLine();
 
-            // Clean Exit
-            Clean();
+                Tokenizer Tokens = new Tokenizer( Command );
+
+
+                // Doing the job
+                    // Initialise Command
+                Initialise();
+
+                    // Run chosen command
+                Run();
+
+                    // Clean Exit
+                Clean();
+            }
 
         } // End Main
 

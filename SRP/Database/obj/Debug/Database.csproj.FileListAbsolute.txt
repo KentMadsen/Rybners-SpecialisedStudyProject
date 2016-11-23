@@ -1,0 +1,5 @@
+C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\Database\bin\Debug\Database.dll
+C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\Database\bin\Debug\Database.pdb
+C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\Database\obj\Debug\Database.csprojResolveAssemblyReference.cache
+C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\Database\obj\Debug\Database.dll
+C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\Database\obj\Debug\Database.pdb

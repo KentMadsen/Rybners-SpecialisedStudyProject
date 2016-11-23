@@ -101,12 +101,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="General.cs" />
     <Compile Include="Orders\Commands.cs" />
     <Compile Include="Orders\Predict.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Orders\Train.cs" />
+    <Compile Include="Tokenizer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -122,6 +122,16 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Database\Database.csproj">
+      <Project>{5bf815da-c661-445f-b790-207b4bb133b6}</Project>
+      <Name>Database</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Machine Learning\Machine Learning.csproj">
+      <Project>{bb988e60-f87d-43dc-896a-2b0da6d0bc3d}</Project>
+      <Name>Machine Learning</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

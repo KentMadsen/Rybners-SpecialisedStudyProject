@@ -20,8 +20,6 @@ namespace Studieretningsproject.Orders
         {
 
 
-
-
         } // Initialise
         
         public override void Run()
