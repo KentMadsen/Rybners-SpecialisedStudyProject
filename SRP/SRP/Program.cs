@@ -24,24 +24,73 @@ namespace Studieretningsproject
 
     class Program
     {
-        static Orders.Commands Command;
+        static Orders.Commands command;
+        static GetOpts Options;
 
-        static bool Continue = true;
+        // Program States
+        static bool Empty = true;
 
+        static bool CommandInput = true;
+
+        static bool Continue = false;
+        static bool Skip = false;
+        
         static void Main( string[] Arguments )
         {
-            // Initialise
-
-            // 
-            while( Continue )
+            if ( Arguments.Length == 0 )
             {
-                // Get Input
-                string Command;
-                Command = Console.ReadLine();
+                CommandInput = true;
+                Continue = true;
+            }
 
-                Tokenizer Tokens = new Tokenizer( Command );
+            Options = new GetOpts();
+            
+            Console.WriteLine("Input Command");
+
+            while ( Continue )
+            {
+                if( Skip == false )
+                {
+
+                    if( CommandInput == false )
+                    {
+                        // Arguments first
+
+                    }
+                    else
+                    {
+
+                        // Commandline
+                        String UserCom = Console.ReadLine();
+                        
+
+                    }
+
+                }
+
+                // Interprete Commands
+                Interprete();
+
+                // Do the job
+                Cycle();
+
+            }
+            
+        } // End Main
+
+        static void Interprete()
+        {
+
+            
+
+        } // End Interprete
 
 
+        static void Cycle()
+        {
+
+            if ( Empty != true )
+            {
                 // Doing the job
                     // Initialise Command
                 Initialise();
@@ -53,23 +102,24 @@ namespace Studieretningsproject
                 Clean();
             }
 
-        } // End Main
 
+        }
+        
         static void Initialise( )
         {
-            Command.Initialise();
+            command.Initialise();
         } // End Initialise()
 
         //
         static void Run()
         {
-            Command.Run();
+            command.Run();
         } // End Run()
 
         //
         static void Clean()
         {
-            Command.Clean();
+            command.Clean();
         } // End Clean()
         
     } // End Class Program

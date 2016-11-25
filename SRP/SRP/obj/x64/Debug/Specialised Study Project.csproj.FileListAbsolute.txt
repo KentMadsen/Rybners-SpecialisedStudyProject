@@ -8,3 +8,5 @@ C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\SRP\bin\x64\Debug\Databas
 C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\SRP\bin\x64\Debug\Machine Learning.dll
 C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\SRP\bin\x64\Debug\Database.pdb
 C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\SRP\bin\x64\Debug\Machine Learning.pdb
+C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\SRP\bin\x64\Debug\SharpOptions.dll
+C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\SRP\bin\x64\Debug\SharpOptions.pdb
