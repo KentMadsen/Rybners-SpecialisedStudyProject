@@ -25,7 +25,7 @@ namespace Studieretningsproject
     class Program
     {
         static Orders.Commands command;
-        static GetOpts Options;
+        static GetOptions Options;
 
         // Program States
         static bool Empty = true;
@@ -43,7 +43,7 @@ namespace Studieretningsproject
                 Continue = true;
             }
 
-            Options = new GetOpts();
+            Options = new GetOptions();
             
             Console.WriteLine("Input Command");
 
@@ -62,8 +62,9 @@ namespace Studieretningsproject
 
                         // Commandline
                         String UserCom = Console.ReadLine();
-                        
 
+                        Options.Parsed( UserCom );
+                        
                     }
 
                 }

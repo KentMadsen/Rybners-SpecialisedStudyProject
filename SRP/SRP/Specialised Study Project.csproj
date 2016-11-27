@@ -101,6 +101,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GetOptions.cs" />
     <Compile Include="Orders\Commands.cs" />
     <Compile Include="Orders\Predict.cs" />
     <Compile Include="Program.cs" />
@@ -130,10 +131,6 @@
     <ProjectReference Include="..\Machine Learning\Machine Learning.csproj">
       <Project>{bb988e60-f87d-43dc-896a-2b0da6d0bc3d}</Project>
       <Name>Machine Learning</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SharpOptions\SharpOptions.csproj">
-      <Project>{f592ec70-411c-4f81-a121-79219c0a229b}</Project>
-      <Name>SharpOptions</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

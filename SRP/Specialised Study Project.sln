@@ -9,8 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Machine Learning", "Machine
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Database", "Database\Database.csproj", "{5BF815DA-C661-445F-B790-207B4BB133B6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpOptions", "SharpOptions\SharpOptions.csproj", "{F592EC70-411C-4F81-A121-79219C0A229B}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -43,14 +41,6 @@ Global
 		{5BF815DA-C661-445F-B790-207B4BB133B6}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5BF815DA-C661-445F-B790-207B4BB133B6}.Release|x64.ActiveCfg = Release|Any CPU
 		{5BF815DA-C661-445F-B790-207B4BB133B6}.Release|x64.Build.0 = Release|Any CPU
-		{F592EC70-411C-4F81-A121-79219C0A229B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F592EC70-411C-4F81-A121-79219C0A229B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F592EC70-411C-4F81-A121-79219C0A229B}.Debug|x64.ActiveCfg = Debug|x64
-		{F592EC70-411C-4F81-A121-79219C0A229B}.Debug|x64.Build.0 = Debug|x64
-		{F592EC70-411C-4F81-A121-79219C0A229B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F592EC70-411C-4F81-A121-79219C0A229B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F592EC70-411C-4F81-A121-79219C0A229B}.Release|x64.ActiveCfg = Release|Any CPU
-		{F592EC70-411C-4F81-A121-79219C0A229B}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
