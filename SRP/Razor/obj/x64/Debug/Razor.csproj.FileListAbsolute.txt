@@ -1,0 +1,6 @@
+C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\Razor\bin\x64\Debug\Razor.exe.config
+C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\Razor\bin\x64\Debug\Razor.exe
+C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\Razor\bin\x64\Debug\Razor.pdb
+C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\Razor\obj\x64\Debug\Razor.csprojResolveAssemblyReference.cache
+C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\Razor\obj\x64\Debug\Razor.exe
+C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\Razor\obj\x64\Debug\Razor.pdb
