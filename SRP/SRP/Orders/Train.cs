@@ -42,6 +42,11 @@ namespace Studieretningsproject.Orders
 
         } // End Clean
 
+        public override string ToString()
+        {
+            return base.ToString();
+        }
+
     } // End Class Train
 
 } // End Namespace

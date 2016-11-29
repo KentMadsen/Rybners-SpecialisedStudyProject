@@ -10,8 +10,10 @@ namespace Studieretningsproject
     {
         public enum Type
         {
+            Command,
             shortOption,
-            longOption
+            longOption,
+            Unknown
         }
 
         public struct Container
@@ -21,6 +23,8 @@ namespace Studieretningsproject
             public void Init( String t )
             {
                 Token = t;
+
+                Init( false );
             }
 
             public void Init( String t, 
@@ -28,17 +32,21 @@ namespace Studieretningsproject
             {
                 this.Init( t );
                 Parameter = p;
+
+                Init( true );
+            }
+
+            public void Init( bool parametersUsed )
+            {
+                PayloadIsFound = false;
             }
 
             public string Token;
             public string Parameter;
+
+            public bool PayloadIsFound;
         }
-
-        public GetOptions()
-        {
-
-        }
-
+        
         public Container[] Parsed( string[] args )
         {
             List<Container> ListOfOptions = new List<Container>();
@@ -51,6 +59,7 @@ namespace Studieretningsproject
         {
             List<Container> ListOfOptions = new List<Container>();
 
+            // Split into an array
             string[] strs = Tokenizer( args );
             
             // Continue on
@@ -77,36 +86,38 @@ namespace Studieretningsproject
                 }
 
                 if ( parameterised )
-                    c.Init( payload[0], payload[1] );
+                    c.Init( payload[0], 
+                            payload[1] );
                 else
-                    c.Init( message, "" );
+                    c.Init( message );
                 
-
+                // Assign Type
                 switch ( level )
                 {
-                    case 1:
-                        c.t = Type.shortOption;
-                        
+                    case 0:
+                            c.t = Type.Command;
+                        break;
 
+                    case 1:
+                            c.t = Type.shortOption;
                         break;
 
                     case 2:
-                        c.t = Type.longOption;
-                        
-
+                            c.t = Type.longOption;
                         break;
 
                     default:
                         // Unknown
+                            c.t = Type.Unknown;
                         break;
                 }
 
             }
 
-            return null;
+            return ListOfOptions.ToArray();
         }
         
-        private string[] Tokenizer( string ArgString )
+        private String[] Tokenizer( String ArgString )
         {
             List<String> BagOfTokens = new List<String>();
 
@@ -223,7 +234,6 @@ namespace Studieretningsproject
                             parameterised = true;
 
                     builder.Append( currentChar );
-
                 }
                 
             }

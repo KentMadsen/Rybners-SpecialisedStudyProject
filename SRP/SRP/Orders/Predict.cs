@@ -33,6 +33,10 @@ namespace Studieretningsproject.Orders
 
         } // Clean
 
+        public override string ToString()
+        {
+            return base.ToString();
+        }
     } // End Class
 
 } // End Namespace
