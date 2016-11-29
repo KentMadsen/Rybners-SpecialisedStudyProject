@@ -24,7 +24,7 @@ namespace Studieretningsproject
 
     class Program
     {
-        static Orders.Commands command;
+        static Orders.Commands Command;
         static GetOptions Options;
 
         // Program States
@@ -81,23 +81,27 @@ namespace Studieretningsproject
 
         static void Interprete( GetOptions.Container[] Commands )
         {
+
             for( int i = 0; 
                      i <= Commands.Length - 1; 
                      i ++ )
             {
                 GetOptions.Container Current = Commands[i];
 
-                switch( Current.t )
+                switch( Current.Type )
                 {
-                    case GetOptions.Type.Command:
+                    case GetOptions.Types.Command:
                             Intpre_Commands( Current );
                         break;
 
-                    case GetOptions.Type.ShortOption:
+                    case GetOptions.Types.ShortOption:
                             Intpre_Options( Current );
                         break;
 
-                    case GetOptions.Type.Unknown:
+                    case GetOptions.Types.LongOption:
+                        goto case GetOptions.Types.ShortOption;
+
+                    case GetOptions.Types.Unknown:
                         goto default;
 
                     default:
@@ -115,6 +119,14 @@ namespace Studieretningsproject
 
             switch( Commands.Token )
             {
+                case "help":
+
+                    break;
+
+                case "version":
+
+                    break;
+
                 case "quit":
                         Continue = false;
                     break;
@@ -148,19 +160,19 @@ namespace Studieretningsproject
         
         static void Initialise( )
         {
-            command.Initialise();
+            Command.Initialise();
         } // End Initialise()
 
         //
         static void Run()
         {
-            command.Run();
+            Command.Run();
         } // End Run()
 
         //
         static void Clean()
         {
-            command.Clean();
+            Command.Clean();
         } // End Clean()
         
     } // End Class Program

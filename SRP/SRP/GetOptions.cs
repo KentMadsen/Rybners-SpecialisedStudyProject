@@ -8,7 +8,7 @@ namespace Studieretningsproject
 {
     public class GetOptions
     {
-        public enum Type
+        public enum Types
         {
             Command,
             ShortOption,
@@ -18,31 +18,31 @@ namespace Studieretningsproject
 
         public struct Container
         {
-            public Type t;
             
-            public void Init( String t )
+            public void Init( String token )
             {
-                Token = t;
+                Token = token;
 
                 Init( false );
             }
 
-            public void Init( String t, 
-                              String p )
+            public void Init( String token, 
+                              String parameter )
             {
-                this.Init( t );
-                Parameter = p;
-
+                Init( token );
                 Init( true );
+
+                Parameter = parameter;
             }
 
-            public void Init( bool parametersUsed )
+            public void Init( bool isParametersUsed )
             {
-                PayloadIsFound = false;
+                PayloadIsFound = isParametersUsed;
             }
 
             public string Token;
             public string Parameter;
+            public Types  Type;
 
             public bool PayloadIsFound;
         }
@@ -97,20 +97,20 @@ namespace Studieretningsproject
                 switch ( level )
                 {
                     case 0:
-                            c.t = Type.Command;
+                            c.Type = Types.Command;
                         break;
 
                     case 1:
-                            c.t = Type.ShortOption;
+                            c.Type = Types.ShortOption;
                         break;
 
                     case 2:
-                            c.t = Type.LongOption;
+                            c.Type = Types.LongOption;
                         break;
 
                     default:
                         // Unknown
-                            c.t = Type.Unknown;
+                            c.Type = Types.Unknown;
                         break;
                 }
 
