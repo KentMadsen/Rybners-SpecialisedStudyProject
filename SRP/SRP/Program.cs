@@ -63,7 +63,7 @@ namespace Studieretningsproject
                         // Commandline
                         String UserCom = Console.ReadLine();
 
-                        Options.Parsed( UserCom );
+                        GetOptions.Container[] conArray = Options.Parsed( UserCom );
                         
                     }
 

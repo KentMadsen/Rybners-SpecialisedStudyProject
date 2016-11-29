@@ -8,8 +8,22 @@ namespace Studieretningsproject
 {
     public class GetOptions
     {
+        public enum Type
+        {
+            shortOption,
+            longOption
+        }
+
         public struct Container
         {
+            public Type t;
+            
+            public void Init( String t, String p )
+            {
+                Token = t;
+                Parameter = p;
+            }
+
             public string Token;
             public string Parameter;
         }
@@ -26,22 +40,60 @@ namespace Studieretningsproject
 
             return null;
         }
-
-
-
+        
         public Container[] Parsed( string args )
         {
             List<Container> ListOfOptions = new List<Container>();
 
             string[] strs = Tokenizer( args );
-
+            
             // Continue on
-
             for( int i = 0; 
                      i <= strs.Length - 1; 
                      i ++ )
             {
+                Container c = new Container();
+
                 string current = strs[i];
+
+                int level;
+                bool parameterised;
+
+                string message = GetOptionType( current, 
+                                                out level, 
+                                                out parameterised );
+
+                string[] payload = null;
+
+                if( parameterised )
+                {
+                    payload = message.Split( '=' );
+                }
+
+                if (parameterised)
+                    c.Init(payload[0], payload[1]);
+                else
+                {
+                }
+
+                switch ( level )
+                {
+                    case 1:
+                        c.t = Type.shortOption;
+                        
+
+                        break;
+
+                    case 2:
+                        c.t = Type.longOption;
+                        
+
+                        break;
+
+                    default:
+                        // Unknown
+                        break;
+                }
 
             }
 
@@ -124,6 +176,50 @@ namespace Studieretningsproject
             }
             
             return strResult;
+        }
+
+        private String GetOptionType( String s, out int removed, out bool parameterised )
+        {
+            removed = 0;
+            string output;
+
+            StringBuilder builder = new StringBuilder();
+
+            parameterised = false;
+
+            Boolean InitPhase = true;
+
+            for( int x = 0; 
+                     x <= s.Length - 1; 
+                     x ++ )
+            {
+                char currentChar = s[x];
+
+                if( currentChar == '-' )
+                {
+                    if( InitPhase )
+                        removed = removed + 1;
+                    else
+                        builder.Append( currentChar );
+                    
+                }
+                else
+                {
+                    if ( InitPhase == true )
+                        InitPhase = false;
+
+                    if ( currentChar == '=' )
+                        if ( parameterised == false )
+                            parameterised = true;
+
+                    builder.Append( currentChar );
+                }
+                
+            }
+
+            output = builder.ToString();
+
+            return output;
         }
 
         private bool CharacterWriteable( char c, bool AllowSpace )
