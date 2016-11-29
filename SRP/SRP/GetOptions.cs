@@ -18,9 +18,15 @@ namespace Studieretningsproject
         {
             public Type t;
             
-            public void Init( String t, String p )
+            public void Init( String t )
             {
                 Token = t;
+            }
+
+            public void Init( String t, 
+                              String p )
+            {
+                this.Init( t );
                 Parameter = p;
             }
 
@@ -70,11 +76,11 @@ namespace Studieretningsproject
                     payload = message.Split( '=' );
                 }
 
-                if (parameterised)
-                    c.Init(payload[0], payload[1]);
+                if ( parameterised )
+                    c.Init( payload[0], payload[1] );
                 else
-                {
-                }
+                    c.Init( message, "" );
+                
 
                 switch ( level )
                 {
@@ -178,7 +184,9 @@ namespace Studieretningsproject
             return strResult;
         }
 
-        private String GetOptionType( String s, out int removed, out bool parameterised )
+        private String GetOptionType( String s, 
+                                      out int removed, 
+                                      out bool parameterised )
         {
             removed = 0;
             string output;
@@ -197,6 +205,7 @@ namespace Studieretningsproject
 
                 if( currentChar == '-' )
                 {
+
                     if( InitPhase )
                         removed = removed + 1;
                     else
@@ -205,6 +214,7 @@ namespace Studieretningsproject
                 }
                 else
                 {
+
                     if ( InitPhase == true )
                         InitPhase = false;
 
@@ -213,6 +223,7 @@ namespace Studieretningsproject
                             parameterised = true;
 
                     builder.Append( currentChar );
+
                 }
                 
             }
@@ -243,4 +254,5 @@ namespace Studieretningsproject
         }
 
     } // End GetOpts
-}
+
+} // End Namespace
