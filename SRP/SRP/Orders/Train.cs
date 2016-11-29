@@ -12,6 +12,12 @@ namespace Studieretningsproject.Orders
 
         public const string CommandValue = "train";
 
+        public override void Options( GetOptions.Container[] Options )
+        {
+
+        }
+
+
         public Train()
         {
 

@@ -14,7 +14,12 @@ namespace Studieretningsproject.Orders
         {
             
         }
-        
+
+        public override void Options(GetOptions.Container[] Options)
+        {
+
+        }
+
         //
         public override void Initialise(  )
         {

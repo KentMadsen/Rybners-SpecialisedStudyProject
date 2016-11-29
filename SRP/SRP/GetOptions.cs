@@ -113,8 +113,7 @@ namespace Studieretningsproject
                             c.Type = Types.Unknown;
                         break;
                 }
-
-                Console.WriteLine("Added:{0}", c.Token);
+                
                 ListOfOptions.Add( c );
 
             }
@@ -254,27 +253,6 @@ namespace Studieretningsproject
             output = builder.ToString();
 
             return output;
-        }
-
-        private bool CharacterWriteable( char c, 
-                                         bool AllowSpace )
-        {
-            if( c <= 'A' || c >= 'z' )
-                return true;
-            
-            if ( c <= '0' || c >= '9' )
-                return true;
-
-            if ( AllowSpace )
-            {
-                if ( c == ' ' )
-                    return true;
-            }
-
-            if ( c <= '-' )
-                return true;
-            
-            return false;
         }
 
     } // End GetOpts

@@ -25,7 +25,9 @@ namespace Studieretningsproject
     class Program
     {
         static Orders.Commands Command;
+
         static GetOptions Options;
+
 
         // Program States
         static bool Empty = true;
@@ -34,7 +36,9 @@ namespace Studieretningsproject
 
         static bool Continue = false;
         static bool Skip = false;
-        
+
+        static List<GetOptions.Container> ListOfOptions = new List<GetOptions.Container>();
+
         static void Main( string[] Arguments )
         {
             if ( Arguments.Length == 0 )
@@ -45,10 +49,9 @@ namespace Studieretningsproject
 
             Options = new GetOptions();
             
-            Console.WriteLine("Input Command");
-
             while ( Continue )
             {
+
                 if( Skip == false )
                 {
 
@@ -61,6 +64,7 @@ namespace Studieretningsproject
                     {
 
                         // Commandline
+                        Console.Write( ">>> " );
                         String UserCom = Console.ReadLine();
 
                         GetOptions.Container[] conArray = Options.Parsed( UserCom );
@@ -90,35 +94,45 @@ namespace Studieretningsproject
 
                 switch( Current.Type )
                 {
+
+                    // | ------ Commands ------ |
                     case GetOptions.Types.Command:
                             Intpre_Commands( Current );
                         break;
 
+                    // | ------ Options ------ | 
                     case GetOptions.Types.ShortOption:
-                            Intpre_Options( Current );
+                            ListOfOptions.Add( Current );
                         break;
 
                     case GetOptions.Types.LongOption:
                         goto case GetOptions.Types.ShortOption;
-
+                        
+                    // | ------ Unknown ------ |
                     case GetOptions.Types.Unknown:
                         goto default;
 
                     default:
-                        // Unknown
                         break;
                 }
 
             }
             
-
         } // End Interprete
 
         static void Intpre_Commands( GetOptions.Container Commands )
         {
+            // Retrieve commands
+            GetOptions.Container[] options = null;
 
-            switch( Commands.Token )
+            // Continue
+            switch( Commands.Token.ToLower() )
             {
+                // | ------ Main Commands ------ |
+                case "status":
+
+                    break;
+
                 case "help":
 
                     break;
@@ -130,18 +144,28 @@ namespace Studieretningsproject
                 case "quit":
                         Continue = false;
                     break;
+
+                // | ------ Jobs ------ |
+                case "predict":
+                        Orders.Predict commnad_predict = new Orders.Predict();
+
+                        AssignOrder( commnad_predict, 
+                                     options );
+                    break;
+
+                case "train":
+                        Orders.Train commnad_train = new Orders.Train();
+
+                        AssignOrder( commnad_train, 
+                                     options );
+                    break;
             }
-
-        }
-
-        static void Intpre_Options( GetOptions.Container Commands )
-        {
 
         }
 
         static void Cycle()
         {
-
+            // if empty, don't do anything
             if ( Empty != true )
             {
                 // Doing the job
@@ -154,9 +178,25 @@ namespace Studieretningsproject
                     // Clean Exit
                 Clean();
             }
-
-
+            
         }
+
+        static void AssignOrder ( Orders.Commands command, 
+                                  GetOptions.Container[] options )
+        {
+            // Tells program, it isn't empty
+            Empty = false;
+
+            // Assign user chosen command
+            Command = command;
+
+            // If null, don't assign it
+            if ( options != null )
+            {
+                Command.Options( options );
+            }
+
+        } // End AssignOrder
         
         static void Initialise( )
         {
