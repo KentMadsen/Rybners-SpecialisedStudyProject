@@ -11,8 +11,8 @@ namespace Studieretningsproject
         public enum Type
         {
             Command,
-            shortOption,
-            longOption,
+            ShortOption,
+            LongOption,
             Unknown
         }
 
@@ -78,6 +78,7 @@ namespace Studieretningsproject
                                                 out level, 
                                                 out parameterised );
 
+                // Used given it contains parameters
                 string[] payload = null;
 
                 if( parameterised )
@@ -85,6 +86,7 @@ namespace Studieretningsproject
                     payload = message.Split( '=' );
                 }
 
+                // If it contains parameters
                 if ( parameterised )
                     c.Init( payload[0], 
                             payload[1] );
@@ -99,11 +101,11 @@ namespace Studieretningsproject
                         break;
 
                     case 1:
-                            c.t = Type.shortOption;
+                            c.t = Type.ShortOption;
                         break;
 
                     case 2:
-                            c.t = Type.longOption;
+                            c.t = Type.LongOption;
                         break;
 
                     default:
@@ -111,6 +113,9 @@ namespace Studieretningsproject
                             c.t = Type.Unknown;
                         break;
                 }
+
+                Console.WriteLine("Added:{0}", c.Token);
+                ListOfOptions.Add( c );
 
             }
 
@@ -154,22 +159,21 @@ namespace Studieretningsproject
 
             bool Inside = false;
             
-            string strResult = "\0";
+            string strResult = "";
 
             for ( int i = Begin;
                       i <= EndPosition;
                       i ++ )
             {
                 char current = Arg[i];
-
-                if( current == '"' )
+                
+                if ( current == '"' )
                 {
                     if ( Inside )
                         Inside = false;
                     else
                         Inside = true;
-
-                    continue;
+                            goto write;   
                 }
 
                 if( current == ' ' )
@@ -179,35 +183,44 @@ namespace Studieretningsproject
                         strBuilder.Clear();
 
                         SkipTo = ( i );
-                        break;
+
+                            break;
                     }
                     else
-                    {
                         strBuilder.Append( current );
-                    }
+                else
+                    strBuilder.Append( current );
+
+                write:
+                if ( i == EndPosition )
+                {
+                    strResult = strBuilder.ToString();
+                    strBuilder.Clear();
+                }
                 else
                 {
-                    strBuilder.Append( current );
+                    continue;
                 }
-                
             }
             
             return strResult;
         }
 
         private String GetOptionType( String s, 
-                                      out int removed, 
-                                      out bool parameterised )
+                                      out int Removed, 
+                                      out bool Parameterised )
         {
-            removed = 0;
+            // Parameters
+            Removed = 0;
+            Parameterised = false;
+
+            // Variables
             string output;
 
+            Boolean initPhase     = true;
+
             StringBuilder builder = new StringBuilder();
-
-            parameterised = false;
-
-            Boolean InitPhase = true;
-
+            
             for( int x = 0; 
                      x <= s.Length - 1; 
                      x ++ )
@@ -217,8 +230,8 @@ namespace Studieretningsproject
                 if( currentChar == '-' )
                 {
 
-                    if( InitPhase )
-                        removed = removed + 1;
+                    if( initPhase )
+                        Removed = Removed + 1;
                     else
                         builder.Append( currentChar );
                     
@@ -226,12 +239,12 @@ namespace Studieretningsproject
                 else
                 {
 
-                    if ( InitPhase == true )
-                        InitPhase = false;
+                    if ( initPhase == true )
+                        initPhase = false;
 
                     if ( currentChar == '=' )
-                        if ( parameterised == false )
-                            parameterised = true;
+                        if ( Parameterised == false )
+                            Parameterised = true;
 
                     builder.Append( currentChar );
                 }
@@ -243,7 +256,8 @@ namespace Studieretningsproject
             return output;
         }
 
-        private bool CharacterWriteable( char c, bool AllowSpace )
+        private bool CharacterWriteable( char c, 
+                                         bool AllowSpace )
         {
             if( c <= 'A' || c >= 'z' )
                 return true;

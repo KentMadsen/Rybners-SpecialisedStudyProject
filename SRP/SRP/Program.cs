@@ -64,13 +64,13 @@ namespace Studieretningsproject
                         String UserCom = Console.ReadLine();
 
                         GetOptions.Container[] conArray = Options.Parsed( UserCom );
-                        
+
+                        // Interprete Commands
+                        Interprete( conArray );
+
                     }
 
                 }
-
-                // Interprete Commands
-                Interprete();
 
                 // Do the job
                 Cycle();
@@ -79,13 +79,53 @@ namespace Studieretningsproject
             
         } // End Main
 
-        static void Interprete()
+        static void Interprete( GetOptions.Container[] Commands )
         {
+            for( int i = 0; 
+                     i <= Commands.Length - 1; 
+                     i ++ )
+            {
+                GetOptions.Container Current = Commands[i];
 
+                switch( Current.t )
+                {
+                    case GetOptions.Type.Command:
+                            Intpre_Commands( Current );
+                        break;
+
+                    case GetOptions.Type.ShortOption:
+                            Intpre_Options( Current );
+                        break;
+
+                    case GetOptions.Type.Unknown:
+                        goto default;
+
+                    default:
+                        // Unknown
+                        break;
+                }
+
+            }
             
 
         } // End Interprete
 
+        static void Intpre_Commands( GetOptions.Container Commands )
+        {
+
+            switch( Commands.Token )
+            {
+                case "quit":
+                        Continue = false;
+                    break;
+            }
+
+        }
+
+        static void Intpre_Options( GetOptions.Container Commands )
+        {
+
+        }
 
         static void Cycle()
         {
