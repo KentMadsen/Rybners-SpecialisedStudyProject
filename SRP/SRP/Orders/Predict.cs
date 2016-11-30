@@ -15,9 +15,10 @@ namespace Studieretningsproject.Orders
             
         }
 
-        public override void Options(GetOptions.Container[] Options)
+        public override void Options( GetOptions.Container[] Options )
         {
-
+            for (int x = 0; x <= Options.Length - 1; x++)
+                Console.WriteLine(Options[x].Token);
         }
 
         //

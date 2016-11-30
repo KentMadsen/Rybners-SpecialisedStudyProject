@@ -26,7 +26,7 @@ namespace Studieretningsproject
     {
         static Orders.Commands Command;
 
-        static GetOptions Options;
+        static GetOptions gOptions;
 
 
         // Program States
@@ -36,6 +36,8 @@ namespace Studieretningsproject
 
         static bool Continue = false;
         static bool Skip = false;
+
+        static bool Complete = true;
 
         static List<GetOptions.Container> ListOfOptions = new List<GetOptions.Container>();
 
@@ -47,7 +49,7 @@ namespace Studieretningsproject
                 Continue = true;
             }
 
-            Options = new GetOptions();
+            gOptions = new GetOptions();
             
             while ( Continue )
             {
@@ -59,26 +61,27 @@ namespace Studieretningsproject
                     {
                         // Arguments first
 
+                        
                     }
                     else
                     {
 
                         // Commandline
                         Console.Write( ">>> " );
+
                         String UserCom = Console.ReadLine();
 
-                        GetOptions.Container[] conArray = Options.Parsed( UserCom );
+                        GetOptions.Container[] conArray = gOptions.Parsed( UserCom );
 
                         // Interprete Commands
                         Interprete( conArray );
 
+                        ListOfOptions.Clear();
+
                     }
 
                 }
-
-                // Do the job
-                Cycle();
-
+                
             }
             
         } // End Main
@@ -91,22 +94,24 @@ namespace Studieretningsproject
                      i ++ )
             {
                 GetOptions.Container Current = Commands[i];
-
-                switch( Current.Type )
+                
+                switch ( Current.Type )
                 {
-
+                    
                     // | ------ Commands ------ |
                     case GetOptions.Types.Command:
+                            Execute();
+                        
                             Intpre_Commands( Current );
                         break;
 
-                    // | ------ Options ------ | 
+                    case GetOptions.Types.LongOption:
+                        goto SO;
+
                     case GetOptions.Types.ShortOption:
+                        SO:
                             ListOfOptions.Add( Current );
                         break;
-
-                    case GetOptions.Types.LongOption:
-                        goto case GetOptions.Types.ShortOption;
                         
                     // | ------ Unknown ------ |
                     case GetOptions.Types.Unknown:
@@ -118,57 +123,91 @@ namespace Studieretningsproject
 
             }
             
+            Execute();
+            
+            
         } // End Interprete
+
+        static void Execute()
+        {
+            if( Complete != true )
+            {
+                // Do the job
+                Cycle();
+            }
+        }
 
         static void Intpre_Commands( GetOptions.Container Commands )
         {
-            // Retrieve commands
-            GetOptions.Container[] options = null;
-
             // Continue
             switch( Commands.Token.ToLower() )
             {
                 // | ------ Main Commands ------ |
-                case "status":
-
-                    break;
-
                 case "help":
+                        help:
 
                     break;
 
                 case "version":
+                        version:
 
                     break;
-
+                    
                 case "quit":
+                            quit:
                         Continue = false;
                     break;
 
                 // | ------ Jobs ------ |
                 case "predict":
+                        Complete = false;
+
                         Orders.Predict commnad_predict = new Orders.Predict();
 
-                        AssignOrder( commnad_predict, 
-                                     options );
+                        AssignOrder( commnad_predict );
                     break;
 
                 case "train":
+                        Complete = false;
+
                         Orders.Train commnad_train = new Orders.Train();
 
-                        AssignOrder( commnad_train, 
-                                     options );
+                        AssignOrder( commnad_train );
                     break;
+
+                // | ------ Fast ------ |
+                case "v":
+                    goto version;
+
+                case "q":
+                    goto quit;
+
+                case "h":
+                    goto help;
             }
 
         }
 
+        static void AssignOrder ( Orders.Commands command )
+        {
+            // Tells program, it isn't empty
+            Empty = false;
+
+            // Assign user chosen command
+            Command = command;
+
+        } // End AssignOrder
+        
         static void Cycle()
         {
+
             // if empty, don't do anything
             if ( Empty != true )
             {
                 // Doing the job
+                    // Insert Options
+                Options();
+
                     // Initialise Command
                 Initialise();
 
@@ -177,27 +216,18 @@ namespace Studieretningsproject
 
                     // Clean Exit
                 Clean();
+
+                Complete = true;
             }
             
         }
 
-        static void AssignOrder ( Orders.Commands command, 
-                                  GetOptions.Container[] options )
+        // ------------------------------------ //
+        static void Options()
         {
-            // Tells program, it isn't empty
-            Empty = false;
+            Command.Options( ListOfOptions.ToArray() );
+        }
 
-            // Assign user chosen command
-            Command = command;
-
-            // If null, don't assign it
-            if ( options != null )
-            {
-                Command.Options( options );
-            }
-
-        } // End AssignOrder
-        
         static void Initialise( )
         {
             Command.Initialise();
