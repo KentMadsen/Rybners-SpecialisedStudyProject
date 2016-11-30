@@ -1,5 +1,0 @@
-C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\Machine Learning\bin\x64\Debug\Machine Learning.dll
-C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\Machine Learning\bin\x64\Debug\Machine Learning.pdb
-C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\Machine Learning\obj\x64\Debug\Machine Learning.csprojResolveAssemblyReference.cache
-C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\Machine Learning\obj\x64\Debug\Machine Learning.dll
-C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\Machine Learning\obj\x64\Debug\Machine Learning.pdb
