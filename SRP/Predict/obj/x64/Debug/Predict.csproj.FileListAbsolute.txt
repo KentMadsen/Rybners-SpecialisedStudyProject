@@ -1,0 +1,9 @@
+C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\Predict\bin\x64\Debug\Predict.exe.config
+C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\Predict\bin\x64\Debug\Predict.exe
+C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\Predict\bin\x64\Debug\Predict.pdb
+C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\Predict\bin\x64\Debug\Database.dll
+C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\Predict\bin\x64\Debug\MachineLearning.dll
+C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\Predict\bin\x64\Debug\Database.pdb
+C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\Predict\bin\x64\Debug\MachineLearning.pdb
+C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\Predict\obj\x64\Debug\Predict.exe
+C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\Predict\obj\x64\Debug\Predict.pdb

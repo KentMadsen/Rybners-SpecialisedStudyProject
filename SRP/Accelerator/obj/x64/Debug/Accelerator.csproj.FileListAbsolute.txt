@@ -1,0 +1,5 @@
+C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\Accelerator\bin\x64\Debug\Accelerator.exe.config
+C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\Accelerator\bin\x64\Debug\Accelerator.exe
+C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\Accelerator\bin\x64\Debug\Accelerator.pdb
+C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\Accelerator\obj\x64\Debug\Accelerator.exe
+C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\Accelerator\obj\x64\Debug\Accelerator.pdb
