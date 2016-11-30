@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Options
+namespace Database
 {
-    public class Class1
+    public abstract class Database
     {
+
     }
 }

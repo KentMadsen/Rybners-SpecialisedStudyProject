@@ -8,8 +8,25 @@ namespace Accelerator
 {
     class Program
     {
-        static void Main(string[] args)
+        public bool Continue = false;
+
+        static void Main( string[] args )
         {
+            Arguments( args );
+
+            Console();
+
+        } // End Main
+
+        static void Arguments(string[] Args)
+        {
+
         }
-    }
-}
+
+        static void Console()
+        {
+
+        }
+
+    } // End Class
+} // End Namespace Accelerator
