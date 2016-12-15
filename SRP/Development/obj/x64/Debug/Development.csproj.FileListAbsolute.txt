@@ -1,0 +1,4 @@
+C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\Development\bin\x64\Debug\Development.dll
+C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\Development\bin\x64\Debug\Development.pdb
+C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\Development\obj\x64\Debug\Development.dll
+C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\Development\obj\x64\Debug\Development.pdb

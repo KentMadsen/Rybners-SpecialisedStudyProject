@@ -1,0 +1,6 @@
+C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\Splitter\bin\x64\Debug\Splitter.exe.config
+C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\Splitter\obj\x64\Debug\Splitter.csprojResolveAssemblyReference.cache
+C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\Splitter\bin\x64\Debug\Splitter.exe
+C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\Splitter\bin\x64\Debug\Splitter.pdb
+C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\Splitter\obj\x64\Debug\Splitter.exe
+C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\Splitter\obj\x64\Debug\Splitter.pdb

@@ -74,9 +74,9 @@
       <Project>{4b8e3605-dc5b-4309-9262-bd2d581ee9aa}</Project>
       <Name>Database</Name>
     </ProjectReference>
-    <ProjectReference Include="..\MachineLearning\MachineLearning.csproj">
+    <ProjectReference Include="..\MachineLearning\Machine Learning.csproj">
       <Project>{0bb5d3aa-bd4f-400c-bca1-69ea20d124ec}</Project>
-      <Name>MachineLearning</Name>
+      <Name>Machine Learning</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
