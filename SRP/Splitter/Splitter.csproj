@@ -63,9 +63,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Application.cs" />
-    <Compile Include="DirectorySearch.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="IO\IO.cs" />
+    <Compile Include="Misc.cs" />
+    <Compile Include="Program\Application.cs" />
+    <Compile Include="IO\DirectorySearch.cs" />
+    <Compile Include="Files\TextSplitter.cs" />
+    <Compile Include="Program\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

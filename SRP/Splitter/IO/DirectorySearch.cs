@@ -7,10 +7,11 @@ using System.Threading.Tasks;
 
 namespace Splitter
 {
-    class DirectorySearch
+    public class DirectorySearch
     {
         // Accessors
-        List< String > foundDirectories
+            // Public
+        public List< String > foundDirectories
         {
             get
             {
@@ -18,7 +19,7 @@ namespace Splitter
             }
         }
 
-        List< String > foundFiles
+        public List< String > foundFiles
         {
             get
             {
@@ -26,11 +27,32 @@ namespace Splitter
             }
         }
 
+        public String usedRootDirectory
+        {
+            get
+            {
+                return internRootDirectory;
+            }
+        }
+
+            // Protected
+        protected String externRootDirectory
+        {
+            get
+            {
+                return internRootDirectory;
+            }
+            set
+            {
+                internRootDirectory = value;
+            }
+        }
+
         // Variables
         private Boolean Debug                = false;
 
             // Main Variables
-        private String rootDirectory;
+        private String internRootDirectory;
 
             // Filters
         private Boolean FilterForDirectories = false;
@@ -42,19 +64,13 @@ namespace Splitter
 
             // Buffers
         private List< String > CurrentBuffer = new List< String > ();
-
-        // Constructor
-        protected DirectorySearch( String root )
-        {
-            rootDirectory = root;
-        }
         
         // Functions
         protected void run()
         {
             refresh();
 
-            addDirectories( rootDirectory );
+            addDirectories( internRootDirectory );
 
             recursiveSearch();
         }
