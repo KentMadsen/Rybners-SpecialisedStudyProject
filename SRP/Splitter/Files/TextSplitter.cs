@@ -10,7 +10,17 @@ namespace Splitter
 
     public class TextSplitter : DirectorySearch
     {
-        private Dictionary<String, String> Tokens = new Dictionary<string, string>();
+        public List<String> TokensList
+        {
+            get
+            {
+                return ListOfTokens;
+            }
+        }
+
+        private Dictionary<String, String> TokensHashmap = new Dictionary<string, string>();
+
+        private List<String> ListOfTokens = new List<string>();
 
         private StringBuilder TokenizeBuilder = new StringBuilder();
         private StringBuilder FilterBuilder = new StringBuilder();
@@ -88,9 +98,9 @@ namespace Splitter
                     if ( currentToken.Length <= 4 )
                         goto end;
 
-                    if ( Tokens.ContainsKey( currentToken ) != true )
+                    if ( TokensHashmap.ContainsKey( currentToken ) != true )
                     {
-                        Tokens.Add( currentToken, 
+                        TokensHashmap.Add( currentToken, 
                                     currentToken );
                     }
 
@@ -100,6 +110,18 @@ namespace Splitter
                 
             }
 
+            ExchangeBuffer();
+
+        }
+
+        private void ExchangeBuffer()
+        {
+            foreach( String s in TokensHashmap.Keys )
+            {
+                ListOfTokens.Add( s );
+            }
+
+            TokensHashmap.Clear();
         }
 
         private Boolean isAlphabet( char current )
@@ -275,7 +297,8 @@ namespace Splitter
         {
             FilterBuilder.Clear();
         }
+        
 
-    }
+    } // End Class
 
-}
+} // End Namespace

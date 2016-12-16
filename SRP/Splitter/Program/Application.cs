@@ -17,22 +17,8 @@ namespace Splitter
 
         public void initialise( String[] Arguments )
         {
-            checkDirectories();
 
 
-        }
-
-        public void checkDirectories()
-        {
-            if( IO.Directories.Exist( Misc.Dump ) == false )
-            {
-                IO.Directories.Create( Misc.Dump );
-            }
-
-            if( IO.Directories.Exist( Misc.Tokens ) == false )
-            {
-                IO.Directories.Create( Misc.Tokens );
-            }
         }
 
         public void start()
@@ -40,6 +26,7 @@ namespace Splitter
             TextSplitter splitter = new TextSplitter( @"C:\Users\Fract\Desktop\Workspace\Reuters" );
 
             splitter.Initialise();
+
             splitter.ReadFiles();
             
 
