@@ -5,10 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using IO;
+
 namespace Splitter
 {
 
-    public class TextSplitter : DirectorySearch
+    public class TextSplitter : RecursiveSearch
     {
         private Dictionary<String, String> TokensHashmap = new Dictionary<string, string>();
         
