@@ -9,6 +9,6 @@ namespace Splitter
     public static class Misc
     {
         public static String Dump = ".\\Dump";
-        public static String Tokens = Dump + @"\tokens";
+        public static String Tokens = Dump + @"\Tokens";
     }
 }

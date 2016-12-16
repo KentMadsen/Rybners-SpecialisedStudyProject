@@ -67,34 +67,29 @@ namespace Splitter
 
         private void TokenizeText( string inputLine )
         {
-            int Length = inputLine.Length - 1;
+            int End = inputLine.Length - 1;
 
             for( int x = 0; 
-                     x <= Length; 
+                     x <= End; 
                      x ++ )
             {
                 char currentChar = inputLine[x];
 
-                AllowedCharacter( currentChar );
+                isAllowedCharacter( currentChar );
 
                 if ( currentChar == ' '  ||
                      currentChar == '\r' ||
                      currentChar == '\n' ||
-                     x == Length )
+                     x == End )
                 {
                     string original = TokenizeBuilder.ToString().ToLower();
-                    string currentToken = FilterText( original );
+                    string currentToken = FilterArtifactsFromText( original );
 
-                    if ( currentToken.Length == 3 )
+                    if ( currentToken.Length <= 4 )
                         goto end;
 
                     if ( Tokens.ContainsKey( currentToken ) != true )
                     {
-
-
-                        Console.WriteLine( "Original :[{0}]", original);
-                        Console.WriteLine( "Added    :[{0}]", currentToken );
-
                         Tokens.Add( currentToken, 
                                     currentToken );
                     }
@@ -154,7 +149,7 @@ namespace Splitter
                 return false;
         }
 
-        private Boolean isBetweenTwoKeys(char b, char f)
+        private Boolean isBetweenTwoKeys( char b, char f )
         {
             if ( ( isNumber( b ) || isAlphabet( b ) ) && 
                  ( isNumber( f ) || isAlphabet( f ) ) )
@@ -163,7 +158,7 @@ namespace Splitter
                 return false;
         }
 
-        private String FilterText( string input )
+        private String FilterArtifactsFromText( string input )
         {
             // Variables
             int arrayEnd = input.Length -1;
@@ -241,7 +236,7 @@ namespace Splitter
             return retValue;
         }
         
-        private void AllowedCharacter( char c )
+        private void isAllowedCharacter( char c )
         {
 
             if ( isAlphabet( c ) )
@@ -265,21 +260,22 @@ namespace Splitter
         {
             TokenizeBuilder.Append( a );
         }
+        
+        private void AppendFilter( char c )
+        {
+            FilterBuilder.Append( c );
+        }
 
         private void ClearTokenize()
         {
             TokenizeBuilder.Clear();
         }
 
-        private void AppendFilter( char c )
-        {
-            FilterBuilder.Append(c);
-        }
-
         private void ClearFilter()
         {
             FilterBuilder.Clear();
         }
+
     }
 
 }
