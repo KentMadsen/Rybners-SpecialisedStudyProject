@@ -23,14 +23,24 @@ namespace Database
             ODCom.CommandText = @"insert into Word(Token) values(?);";
 
             ODCom.Connection = ODC;
-            
-            ODCom.Parameters.AddWithValue( "@Token", Word );
 
-            Connect();
+            ODCom.Parameters.AddWithValue("@Token", Word);
 
-            ODCom.ExecuteNonQuery();
+            try
+            {
+                Connect();
 
-            Close();
+                ODCom.ExecuteNonQuery();
+            }
+            catch( Exception ex )
+            {
+
+            }
+            finally
+            {
+                if( ODC.State == System.Data.ConnectionState.Open )
+                    Close();
+            }
         }
 
     }

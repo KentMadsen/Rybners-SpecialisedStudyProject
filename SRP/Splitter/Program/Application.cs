@@ -23,19 +23,8 @@ namespace Splitter
 
         public void start()
         {
-            TextSplitter splitter = new TextSplitter( @"C:\Users\Fract\Desktop\Workspace\Reuters" );
-
-            splitter.Initialise();
-
-            splitter.ReadFiles();
-
-            Database.Tokens Register = new Database.Tokens( "./Base.accdb" );
             
-            foreach( String s in splitter.TokensList )
-            {
-                Register.InsertWord( s );
-            }
-
+            
             while( Continue )
             {
 
