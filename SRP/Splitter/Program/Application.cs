@@ -8,11 +8,14 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
+using LexicalAnalysis;
+
 namespace Splitter
 {
 
     class Application
     {
+        private Nuclear nuke;
         private Boolean Continue = true;
 
         public void initialise( String[] Arguments )
@@ -23,11 +26,15 @@ namespace Splitter
 
         public void start()
         {
-            
-            
+            String path = @"C:\Users\Fract\Desktop\Workspace\Reuters";
+
+            nuke = new Nuclear(path);
+
+            nuke.Search();
+
             while( Continue )
             {
-
+                Thread.Sleep( 250 );
             }
 
         }

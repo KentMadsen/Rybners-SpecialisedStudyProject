@@ -58,6 +58,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Maintenance.cs" />
     <Compile Include="Tokens.cs" />
     <Compile Include="Types\Database.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

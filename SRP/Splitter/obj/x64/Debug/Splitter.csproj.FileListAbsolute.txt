@@ -6,3 +6,7 @@ C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\Splitter\obj\x64\Debug\Sp
 C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\Splitter\obj\x64\Debug\Splitter.pdb
 C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\Splitter\bin\x64\Debug\Database.dll
 C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\Splitter\bin\x64\Debug\Database.pdb
+C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\Splitter\bin\x64\Debug\IO.dll
+C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\Splitter\bin\x64\Debug\LexicalAnalysis.dll
+C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\Splitter\bin\x64\Debug\IO.pdb
+C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\Splitter\bin\x64\Debug\LexicalAnalysis.pdb

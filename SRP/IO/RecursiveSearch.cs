@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.IO;
 
+using System.Threading;
+
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,6 +12,13 @@ namespace IO
 {
     public abstract class RecursiveSearch
     {
+//---------------------------------------------------------------------------->
+// Abstract Functions
+        protected abstract void FoundFile( String file );
+        protected abstract void FoundDirectory( String Directory );
+        
+//---------------------------------------------------------------------------->
+// Acessor
         public String UsedRootDirectory
         {
             get
@@ -31,73 +40,126 @@ namespace IO
             }
         }
 
-        // Variables
+        protected Boolean triggerDirectories
+        {
+            get
+            {
+                return TriggerDirectories;
+            }
+            set
+            {
+                TriggerDirectories = value;
+            }
+        }
+
+        protected Boolean triggerFiles
+        {
+            get
+            {
+                return TriggerFiles;
+            }
+            set
+            {
+                TriggerFiles = value;
+            }
+        }
+
+//---------------------------------------------------------------------------->
+// Variables
             // Main Variables
         private String internRootDirectory;
 
             // Filters
         private Boolean TriggerDirectories = false;
-        private Boolean TriggerFiles = false;
+        private Boolean TriggerFiles       = false;
 
-            // Buffers
+        protected Boolean Completed        = false;
+
+        protected int waitMS = 25;
+
+        protected bool errorOccured = false;
+        protected bool pause        = false;
+        protected bool exit         = false;
+
+        // Buffers
         private Queue<String> rsBuffer = new Queue<String>();
         
-        // Functions
-        protected void QueuePath( String inp )
+//---------------------------------------------------------------------------->
+// Functions
+        protected void QueuePath( String path )
         {
-            rsBuffer.Enqueue( inp );
+            rsBuffer.Enqueue( path );
         }
 
-        protected void QueuePaths( String[] inp )
+        protected void QueuePaths( String[] paths )
         {
-            foreach ( String s in inp )
-                rsBuffer.Enqueue( s );
+            foreach ( String path in paths )
+            {
+                rsBuffer.Enqueue( path );
+            }
         }
 
-        protected void run()
+        protected void Run()
         {
-            refresh();
+            AddDirectories( internRootDirectory );
 
-            addDirectories( internRootDirectory );
-
-            recursiveSearch();
+            Search();
         }
 
         // Retrieves a string from inside the buffer, and removes it's index
-        private String getCurrentString()
+        private String GetCurrentString()
         {
-            String current = rsBuffer.Peek();
-            rsBuffer.Dequeue();
+            String current = rsBuffer.Dequeue();
+            
 
             return current;
         }
 
-        private void recursiveSearch()
+        private void Search()
         {
-            String current = getCurrentString();
+            if ( rsBuffer.Count == 0 )
+                goto lExit;
 
-            FoundDirectory( current );
+            String current = GetCurrentString();
 
-            searchForDirectories( current );
+            if ( String.IsNullOrEmpty( current ) )
+                goto End;
+
+            SearchForDirectories( current );
             
-            searchForFiles( current );
+            if ( TriggerDirectories == true )
+                FoundDirectory( current );
 
+            SearchForFiles( current );
+
+            if( pause == true )
+                while( this.pause )
+                {
+                    Thread.Sleep( waitMS );
+                }
+
+            if ( exit == true )
+                goto lExit;
+
+            End:
             if ( rsBuffer.Count != 0 )
-                recursiveSearch();
+                Search();
+
+            lExit:
+            this.exit = false;
+
+                return;
         }
 
-        private void addDirectories( String path )
+        private void AddDirectories( String path )
         {
             if ( Directory.Exists( path ) == false )
                 return;
-
-            if ( TriggerDirectories == true )
-                FoundDirectory( path );
-
+            
             rsBuffer.Enqueue( path );
         }
 
-        private void searchForDirectories( String current )
+        private void SearchForDirectories( String current )
         {
 
             String[] directories = Directory.GetDirectories( current );
@@ -108,7 +170,7 @@ namespace IO
             }
         }
 
-        private void searchForFiles( String current )
+        private void SearchForFiles( String current )
         {
             if ( TriggerFiles == false )
                 return;
@@ -120,16 +182,13 @@ namespace IO
                 FoundFile( s );
             }
 
-        }
+        } // End Search
         
-        private void refresh()
+        private void Refresh()
         {
             rsBuffer.Clear();
-        }
-
-        protected abstract void FoundFile( String file );
-        protected abstract void FoundDirectory( String Directory );
-
+        } // End refresh
+        
     } // End Class
 
 } // End Namespace

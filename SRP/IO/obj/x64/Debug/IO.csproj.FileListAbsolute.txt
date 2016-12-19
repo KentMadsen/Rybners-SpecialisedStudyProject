@@ -1,0 +1,5 @@
+C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\IO\bin\x64\Debug\IO.dll
+C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\IO\bin\x64\Debug\IO.pdb
+C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\IO\obj\x64\Debug\IO.csprojResolveAssemblyReference.cache
+C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\IO\obj\x64\Debug\IO.dll
+C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\IO\obj\x64\Debug\IO.pdb

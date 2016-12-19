@@ -17,10 +17,34 @@ namespace LexicalAnalysis
                 return false;
         }
 
-        public static Boolean isAlphabet( char input )
+        public static Boolean isAlphabetic( char input )
         {
             if ( input >= 'A' &&
-                 input <= 'z')
+                 input <= 'Z')
+                return true;
+
+            if ( input >= 'a' && 
+                 input <= 'z' )
+                return true;
+
+            // Lower case
+            if ( input == 'å' || 
+                 input == 'ø' || 
+                 input == 'æ' )
+                return true;
+
+            // Upper case
+            if ( input == 'Å' || 
+                 input == 'Ø' || 
+                 input == 'Æ')
+                return true;
+            
+            return false;
+        }
+
+        public static Boolean isSpace( char input )
+        {
+            if ( input == ' ' )
                 return true;
             else
                 return false;
