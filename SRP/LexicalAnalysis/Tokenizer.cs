@@ -9,9 +9,14 @@ namespace LexicalAnalysis
     class Tokenizer
     {
         StringBuilder Builder = new StringBuilder();
-
-        List<String> listOfWords = new List<string>();
-
+        private Dictionary<String, String> TokenMap = new Dictionary<string, string>();
+        public Dictionary<String, String> Library
+        {
+            get
+            {
+                return TokenMap;
+            }
+        }
         // 
         private Boolean isBeginning, 
                         isEnd;
@@ -21,12 +26,26 @@ namespace LexicalAnalysis
 
         private char back,
                      front;
+
+        private int minimumLength = 7;
         
         private void Reset()
         {
             isBeginning = false;
             isEnd       = false;
         }
+
+        // Builder Functions 
+        private void Append(char c)
+        {
+            Builder.Append(c);
+        }
+
+        private void Clear()
+        {
+            Builder.Clear();
+        }
+
 
         private void State( int f, 
                             int begin, 
@@ -59,6 +78,7 @@ namespace LexicalAnalysis
                        begin, 
                        end );
 
+                // Current charracter 
                 char current = Line[x];
 
                 // Update characters
@@ -73,62 +93,71 @@ namespace LexicalAnalysis
                 {
                     Append( current );
                 }
-
-                // Special Cases
-                if( ( isBeginning != true ) && 
-                    ( isEnd != true ) )
-                {
-                    SpecialRules( current, 
-                                  back, front );
-                }
                 
                 if( Tools.isSpace( current ) )
                 {
                     AppendWord();
                 }
 
+                if(SpecialRules(current, back, front) == true)
+                {
+                    Append(current);
+                }
+                
             }
 
+            Reset();
+            
         }
         
         //
         private void AppendWord( )
         {
-            String current = Builder.ToString();
+            String current = Builder.ToString().ToLower();
+
+            if ( current.Length <= this.minimumLength )
+                goto lClear;
 
             if( String.IsNullOrWhiteSpace( current ) )
                 goto lClear;
 
-            listOfWords.Add( current );
+            if( TokenMap.ContainsKey( current ) != true )
+            {
+                TokenMap.Add( current, 
+                              current );
+            }
 
             lClear:
                 Clear();
         }
 
-        // Builder Functions 
-        private void Append( char c )
-        {
-            Builder.Append( c );
-        }
-
-        private void Clear()
-        {
-            Builder.Clear();
-        }
-
         // Rules
-        private void SpecialRules( Char CurrentPos, 
+        private bool SpecialRules( Char CurrentPos, 
                                    Char PriorPos, Char ForwardPos )
         {
+            if( CurrentPos == '\'' )
+            {
+                if ( Tools.isAlphabetic( PriorPos ) && 
+                     Tools.isAlphabetic( ForwardPos ) )
+                    return true;
+            }
+
             if( CurrentPos == '-' )
             {
                 if ( Tools.isAlphabetic( PriorPos ) && 
                      Tools.isAlphabetic( ForwardPos ) )
                 {
-
+                    return true;
                 }
-            }      
+            }
 
+            if( CurrentPos == '.' )
+            {
+                if ( Tools.isAlphabetic( ForwardPos ) && Tools.isAlphabetic(PriorPos))
+                    return true;
+            }
+            
+            return false;
         }
         
     } // End Tokenizer

@@ -47,6 +47,14 @@ namespace LexicalAnalysis
             this.QueuePaths( Paths );
         }
 
+        public Dictionary<String, String> Token
+        {
+            get
+            {
+                return tokenBuilder.Library;
+            }
+        }
+
 //--------------------------------------------------------------------------->
 // Constructors
         public Nuclear()
