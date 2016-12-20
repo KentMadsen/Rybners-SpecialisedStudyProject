@@ -9,7 +9,9 @@ namespace LexicalAnalysis
     class Tokenizer
     {
         StringBuilder Builder = new StringBuilder();
+
         private Dictionary<String, String> TokenMap = new Dictionary<string, string>();
+
         public Dictionary<String, String> Library
         {
             get
