@@ -1,25 +1,41 @@
-﻿using System;
+﻿//---------------------------------------------------------------------------->
+// Include Fields
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+//  ------------------------------------------------------------------------->
+/* Author      : Kent vejrup Madsen
+   Type        : C#, 
+                 CSharp
+   
+   Title       : Specialised Study Project - SSP
+
+   Name        : Application
+   Description : 
+*/
 
 namespace Program
 {
+
     class Application
     {
-        // Variables
-        private Boolean ErrorOccured = false;
-
 //---------------------------------------------------------------------------->
-// Constructor
+// Constructors
         public Application()
         {
 
         }
 
 //---------------------------------------------------------------------------->
-// Tags: Initialising
+// Variables
+    // States
+        private Boolean ErrorOccured = false;
+
+
+//---------------------------------------------------------------------------->
+    // Tags: Initialising
         public void Init( String[] Arguments )
         {
 
@@ -48,6 +64,7 @@ namespace Program
         {
 
         }
-    }
+
+    } // End Class : Application
 
 } // End Namespace : Program

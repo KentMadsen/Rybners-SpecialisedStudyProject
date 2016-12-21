@@ -1,4 +1,6 @@
-﻿using System;
+﻿//  ------------------------------------------------------------------------->
+// Include Fields
+using System;
 using System.Collections.Generic;
 using System.IO;
 
@@ -8,25 +10,38 @@ using System.Linq;
 using System.Text;
 
 using System.Threading.Tasks;
+//  ------------------------------------------------------------------------->
+/* Author      : Kent vejrup Madsen
+   Type        : C#, 
+                 CSharp
+   
+   Title       : Specialised Study Project - SSP
+
+   Name        : Recursive Directory Searcher
+   Description : 
+*/
 
 namespace Libraries.IO
 {
     public abstract class RecursiveDirectorySearch
     {
-        // Constructor
+        
+//  ------------------------------------------------------------------------->
+// Constructors
         public RecursiveDirectorySearch()
         {
             iChildWorker = new Thread( Search );
         }
 
-//---------------------------------------------------------------------------->
+//  ------------------------------------------------------------------------->
 // Abstract Functions
         protected abstract void FoundFile( String file );
         protected abstract void FoundDirectory( String Directory );
         
-//---------------------------------------------------------------------------->
+//  ------------------------------------------------------------------------->
 // Acessor Objects & Primitives
-            // Protected
+            // Class shared, Accessors
+
                 // Initial Root Path to search 
         protected String RootDirectory
         {
@@ -52,6 +67,7 @@ namespace Libraries.IO
                 iTriggerDirectories = value;
             }
         }
+
         protected Boolean TriggerOnFiles
         {
             get
@@ -63,6 +79,7 @@ namespace Libraries.IO
                 iTriggerFiles = value;
             }
         }
+
         protected Boolean Pause
         {
             get
@@ -74,6 +91,7 @@ namespace Libraries.IO
                 iPause = value;
             }
         }
+
         protected Boolean ErrorOccured
         {
             get
@@ -85,6 +103,7 @@ namespace Libraries.IO
                 iErrorOccured = value;
             }
         }
+
         protected Boolean Completed
         {
             get
@@ -97,7 +116,7 @@ namespace Libraries.IO
             }
         }
 
-//---------------------------------------------------------------------------->
+//  ------------------------------------------------------------------------->
 // Variables
             // Main Variables
         private String iRootDirectory;
@@ -122,8 +141,9 @@ namespace Libraries.IO
         
             // Children
         private Thread iChildWorker;
-//---------------------------------------------------------------------------->
-// Functions
+
+//  ------------------------------------------------------------------------->
+// Shared Class Functions
         protected void QueuePath( String Path )
         {
             AddDirectory( Path );
@@ -136,6 +156,16 @@ namespace Libraries.IO
                 AddDirectory( path );
             }
         }
+        
+        protected String PeekQueue()
+        {
+            return iPathBuffer.Peek();
+        }
+
+        protected String DequeuePath()
+        {
+            return iPathBuffer.Dequeue();
+        }
 
         protected void Run()
         {
@@ -144,13 +174,61 @@ namespace Libraries.IO
             iChildWorker.Start();
         }
 
+//  ------------------------------------------------------------------------->
+// Private Functions
+        // Clear Buffer
+        private void Refresh()
+        {
+            iPathBuffer.Clear();
+        } // End refresh
+
+
         // Retrieves a string from inside the buffer, and removes it's index
         private String GetCurrentString()
         {
-            String current = iPathBuffer.Dequeue();
-            
-            return current;
+            return iPathBuffer.Dequeue();
         }
+
+        // Add's Directories or Paths, to the Queue.
+        private void AddDirectory( String path )
+        {
+            // Empty, do nothing
+            if ( String.IsNullOrWhiteSpace( path ) )
+                return;
+
+            // Doesn't exist, do nothing
+            if ( Directory.Exists( path ) == false )
+                return;
+
+            iPathBuffer.Enqueue( path );
+        }
+
+
+        //
+        private void SearchForDirectories( String Current )
+        {
+            String[] directories = Directory.GetDirectories( Current );
+
+            foreach ( String path in directories )
+            {
+                AddDirectory( path );
+            }
+        } // End SearchForDirectories
+
+        //
+        private void SearchForFiles( String Current )
+        {
+            if ( iTriggerFiles == false )
+                return;
+
+            String[] files = Directory.GetFiles( Current );
+
+            foreach ( String file in files )
+            {
+                FoundFile( file );
+            }
+
+        } // End SearchForFiles
 
         private void Search()
         {
@@ -194,50 +272,7 @@ namespace Libraries.IO
             lExit:
             this.iExit = false;
                 return;
-        }
-        
-        // Work Functions
-            // Add's Directories or Paths, to the Queue.
-        private void AddDirectory( String path )
-        {
-            if ( Directory.Exists( path ) == false )
-                return;
-            
-            iPathBuffer.Enqueue( path );
-        }
-
-            //
-        private void SearchForDirectories( String Current )
-        {
-
-            String[] directories = Directory.GetDirectories( Current );
-
-            foreach ( String path in directories )
-            {
-                AddDirectory( path );
-            }
-        }
-
-            //
-        private void SearchForFiles( String Current )
-        {
-            if ( iTriggerFiles == false )
-                return;
-
-            String[] files = Directory.GetFiles( Current );
-
-            foreach ( String file in files )
-            {
-                FoundFile( file );
-            }
-
-        } // End Search
-        
-        // Clear Buffer
-        private void Refresh()
-        {
-            iPathBuffer.Clear();
-        } // End refresh
+        } // End void Search()
         
     } // End Class
 
