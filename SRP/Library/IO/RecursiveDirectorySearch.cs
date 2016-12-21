@@ -6,12 +6,19 @@ using System.Threading;
 
 using System.Linq;
 using System.Text;
+
 using System.Threading.Tasks;
 
 namespace Libraries.IO
 {
     public abstract class RecursiveDirectorySearch
     {
+        // Constructor
+        public RecursiveDirectorySearch()
+        {
+            iChildWorker = new Thread( Search );
+        }
+
 //---------------------------------------------------------------------------->
 // Abstract Functions
         protected abstract void FoundFile( String file );
@@ -45,7 +52,6 @@ namespace Libraries.IO
                 iTriggerDirectories = value;
             }
         }
-
         protected Boolean TriggerOnFiles
         {
             get
@@ -57,7 +63,6 @@ namespace Libraries.IO
                 iTriggerFiles = value;
             }
         }
-
         protected Boolean Pause
         {
             get
@@ -69,7 +74,6 @@ namespace Libraries.IO
                 iPause = value;
             }
         }
-
         protected Boolean ErrorOccured
         {
             get
@@ -81,7 +85,6 @@ namespace Libraries.IO
                 iErrorOccured = value;
             }
         }
-
         protected Boolean Completed
         {
             get
@@ -111,32 +114,34 @@ namespace Libraries.IO
         private Boolean iPause          = false;
         private Boolean iExit           = false;
         
-        // Wait
+            // Wait
         private int iWaitMS = 25;
         
-        // Buffers
+            // Buffers
         private Queue<String> iPathBuffer = new Queue<String>();
         
+            // Children
+        private Thread iChildWorker;
 //---------------------------------------------------------------------------->
 // Functions
         protected void QueuePath( String Path )
         {
-            iPathBuffer.Enqueue( Path );
+            AddDirectory( Path );
         }
 
         protected void QueuePaths( String[] Paths )
         {
             foreach ( String path in Paths )
             {
-                iPathBuffer.Enqueue( path );
+                AddDirectory( path );
             }
         }
 
         protected void Run()
         {
-            AddDirectories( iRootDirectory );
+            AddDirectory( iRootDirectory );
 
-            Search();
+            iChildWorker.Start();
         }
 
         // Retrieves a string from inside the buffer, and removes it's index
@@ -190,8 +195,10 @@ namespace Libraries.IO
             this.iExit = false;
                 return;
         }
-
-        private void AddDirectories( String path )
+        
+        // Work Functions
+            // Add's Directories or Paths, to the Queue.
+        private void AddDirectory( String path )
         {
             if ( Directory.Exists( path ) == false )
                 return;
@@ -199,27 +206,29 @@ namespace Libraries.IO
             iPathBuffer.Enqueue( path );
         }
 
-        private void SearchForDirectories( String current )
+            //
+        private void SearchForDirectories( String Current )
         {
 
-            String[] directories = Directory.GetDirectories( current );
+            String[] directories = Directory.GetDirectories( Current );
 
-            foreach ( String s in directories )
+            foreach ( String path in directories )
             {
-                iPathBuffer.Enqueue( s );
+                AddDirectory( path );
             }
         }
 
-        private void SearchForFiles( String current )
+            //
+        private void SearchForFiles( String Current )
         {
             if ( iTriggerFiles == false )
                 return;
 
-            String[] files = Directory.GetFiles( current );
+            String[] files = Directory.GetFiles( Current );
 
-            foreach ( String s in files )
+            foreach ( String file in files )
             {
-                FoundFile( s );
+                FoundFile( file );
             }
 
         } // End Search

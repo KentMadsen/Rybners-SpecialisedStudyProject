@@ -8,6 +8,7 @@ namespace Program
 {
     class Application
     {
+        // Variables
         private Boolean ErrorOccured = false;
 
 //---------------------------------------------------------------------------->
