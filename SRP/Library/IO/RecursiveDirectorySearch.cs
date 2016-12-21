@@ -100,17 +100,20 @@ namespace Libraries.IO
         private String iRootDirectory;
 
             // Filters
+                // Triggers -> do something
         private Boolean iTriggerDirectories = false;
         private Boolean iTriggerFiles       = false;
 
-        private Boolean iCompleted        = false;
+                // Search States
+        private Boolean iCompleted      = false;
 
+        private Boolean iErrorOccured   = false;
+        private Boolean iPause          = false;
+        private Boolean iExit           = false;
+        
+        // Wait
         private int iWaitMS = 25;
-
-        private bool iErrorOccured = false;
-        private bool iPause        = false;
-        private bool iExit         = false;
-
+        
         // Buffers
         private Queue<String> iPathBuffer = new Queue<String>();
         
@@ -157,7 +160,7 @@ namespace Libraries.IO
                     Thread.Sleep( iWaitMS );
                 }
             
-            // get's the next path, in Queue
+            // Get's the next path, in Queue
             String current = GetCurrentString();
 
             // If the Path is empty, go to the next Path, in queue
