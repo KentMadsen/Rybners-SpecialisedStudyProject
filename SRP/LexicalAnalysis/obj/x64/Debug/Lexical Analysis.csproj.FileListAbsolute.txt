@@ -1,7 +1,0 @@
-C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\LexicalAnalysis\bin\x64\Debug\LexicalAnalysis.dll
-C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\LexicalAnalysis\bin\x64\Debug\LexicalAnalysis.pdb
-C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\LexicalAnalysis\obj\x64\Debug\Lexical Analysis.csprojResolveAssemblyReference.cache
-C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\LexicalAnalysis\obj\x64\Debug\LexicalAnalysis.dll
-C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\LexicalAnalysis\obj\x64\Debug\LexicalAnalysis.pdb
-C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\LexicalAnalysis\bin\x64\Debug\IO.dll
-C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\LexicalAnalysis\bin\x64\Debug\IO.pdb
