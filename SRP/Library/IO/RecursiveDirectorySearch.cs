@@ -18,90 +18,120 @@ namespace Libraries.IO
         protected abstract void FoundDirectory( String Directory );
         
 //---------------------------------------------------------------------------->
-// Acessor
-        public String UsedRootDirectory
-        {
-            get
-            {
-                return internRootDirectory;
-            }
-        }
-
+// Acessor Objects & Primitives
             // Protected
-        protected String externRootDirectory
+                // Initial Root Path to search 
+        protected String RootDirectory
         {
             get
             {
-                return internRootDirectory;
+                return iRootDirectory;
             }
             set
             {
-                internRootDirectory = value;
+                iRootDirectory = value;
             }
         }
 
-        protected Boolean triggerDirectories
+                // Functionality
+        protected Boolean TriggerOnDirectories
         {
             get
             {
-                return TriggerDirectories;
+                return iTriggerDirectories;
             }
             set
             {
-                TriggerDirectories = value;
+                iTriggerDirectories = value;
             }
         }
 
-        protected Boolean triggerFiles
+        protected Boolean TriggerOnFiles
         {
             get
             {
-                return TriggerFiles;
+                return iTriggerFiles;
             }
             set
             {
-                TriggerFiles = value;
+                iTriggerFiles = value;
+            }
+        }
+
+        protected Boolean Pause
+        {
+            get
+            {
+                return iPause;
+            }
+            set
+            {
+                iPause = value;
+            }
+        }
+
+        protected Boolean ErrorOccured
+        {
+            get
+            {
+                return iErrorOccured;
+            }
+            set
+            {
+                iErrorOccured = value;
+            }
+        }
+
+        protected Boolean Completed
+        {
+            get
+            {
+                return iCompleted;
+            }
+            set
+            {
+                iCompleted = value;
             }
         }
 
 //---------------------------------------------------------------------------->
 // Variables
             // Main Variables
-        private String internRootDirectory;
+        private String iRootDirectory;
 
             // Filters
-        private Boolean TriggerDirectories = false;
-        private Boolean TriggerFiles       = false;
+        private Boolean iTriggerDirectories = false;
+        private Boolean iTriggerFiles       = false;
 
-        protected Boolean Completed        = false;
+        private Boolean iCompleted        = false;
 
-        protected int waitMS = 25;
+        private int iWaitMS = 25;
 
-        protected bool errorOccured = false;
-        protected bool pause        = false;
-        protected bool exit         = false;
+        private bool iErrorOccured = false;
+        private bool iPause        = false;
+        private bool iExit         = false;
 
         // Buffers
-        private Queue<String> rsBuffer = new Queue<String>();
+        private Queue<String> iPathBuffer = new Queue<String>();
         
 //---------------------------------------------------------------------------->
 // Functions
-        protected void QueuePath( String path )
+        protected void QueuePath( String Path )
         {
-            rsBuffer.Enqueue( path );
+            iPathBuffer.Enqueue( Path );
         }
 
-        protected void QueuePaths( String[] paths )
+        protected void QueuePaths( String[] Paths )
         {
-            foreach ( String path in paths )
+            foreach ( String path in Paths )
             {
-                rsBuffer.Enqueue( path );
+                iPathBuffer.Enqueue( path );
             }
         }
 
         protected void Run()
         {
-            AddDirectories( internRootDirectory );
+            AddDirectories( iRootDirectory );
 
             Search();
         }
@@ -109,23 +139,22 @@ namespace Libraries.IO
         // Retrieves a string from inside the buffer, and removes it's index
         private String GetCurrentString()
         {
-            String current = rsBuffer.Dequeue();
+            String current = iPathBuffer.Dequeue();
             
-
             return current;
         }
 
         private void Search()
         {
             // If Empty, Exit
-            if ( rsBuffer.Count == 0 )
+            if ( iPathBuffer.Count == 0 )
                 goto lExit;
 
             // Pause work
-            if ( pause == true )
-                while ( this.pause )
+            if ( iPause == true )
+                while ( this.iPause )
                 {
-                    Thread.Sleep( waitMS );
+                    Thread.Sleep( iWaitMS );
                 }
             
             // get's the next path, in Queue
@@ -139,23 +168,23 @@ namespace Libraries.IO
             SearchForDirectories( current );
             
             // Do something, with the current directory ?
-            if ( TriggerDirectories == true )
+            if ( iTriggerDirectories == true )
                 FoundDirectory( current );
 
             // search for files, in the current Path
             SearchForFiles( current );
             
             // if told to exit, exit's the current work
-            if ( exit == true )
+            if ( iExit == true )
                 goto lExit;
 
             // If the buffer is zero, end the flow
             End:
-            if ( rsBuffer.Count != 0 )
+            if ( iPathBuffer.Count != 0 )
                 Search();
 
             lExit:
-            this.exit = false;
+            this.iExit = false;
                 return;
         }
 
@@ -164,7 +193,7 @@ namespace Libraries.IO
             if ( Directory.Exists( path ) == false )
                 return;
             
-            rsBuffer.Enqueue( path );
+            iPathBuffer.Enqueue( path );
         }
 
         private void SearchForDirectories( String current )
@@ -174,13 +203,13 @@ namespace Libraries.IO
 
             foreach ( String s in directories )
             {
-                rsBuffer.Enqueue( s );
+                iPathBuffer.Enqueue( s );
             }
         }
 
         private void SearchForFiles( String current )
         {
-            if ( TriggerFiles == false )
+            if ( iTriggerFiles == false )
                 return;
 
             String[] files = Directory.GetFiles( current );
@@ -192,9 +221,10 @@ namespace Libraries.IO
 
         } // End Search
         
+        // Clear Buffer
         private void Refresh()
         {
-            rsBuffer.Clear();
+            iPathBuffer.Clear();
         } // End refresh
         
     } // End Class
