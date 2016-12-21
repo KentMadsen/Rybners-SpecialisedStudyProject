@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Libraries.Algorithm
+namespace Library.Algorithm
 {
-    public abstract class Algorithm
+    class Algorithm
     {
-        
     }
 }

@@ -117,37 +117,45 @@ namespace Libraries.IO
 
         private void Search()
         {
+            // If Empty, Exit
             if ( rsBuffer.Count == 0 )
                 goto lExit;
 
-            String current = GetCurrentString();
-
-            if ( String.IsNullOrEmpty( current ) )
-                goto End;
-
-            SearchForDirectories( current );
-            
-            if ( TriggerDirectories == true )
-                FoundDirectory( current );
-
-            SearchForFiles( current );
-
-            if( pause == true )
-                while( this.pause )
+            // Pause work
+            if ( pause == true )
+                while ( this.pause )
                 {
                     Thread.Sleep( waitMS );
                 }
+            
+            // get's the next path, in Queue
+            String current = GetCurrentString();
 
+            // If the Path is empty, go to the next Path, in queue
+            if ( String.IsNullOrEmpty( current ) )
+                goto End;
+
+            // Retrieve Directories, Insert into buffer
+            SearchForDirectories( current );
+            
+            // Do something, with the current directory ?
+            if ( TriggerDirectories == true )
+                FoundDirectory( current );
+
+            // search for files, in the current Path
+            SearchForFiles( current );
+            
+            // if told to exit, exit's the current work
             if ( exit == true )
                 goto lExit;
 
+            // If the buffer is zero, end the flow
             End:
             if ( rsBuffer.Count != 0 )
                 Search();
 
             lExit:
             this.exit = false;
-
                 return;
         }
 
