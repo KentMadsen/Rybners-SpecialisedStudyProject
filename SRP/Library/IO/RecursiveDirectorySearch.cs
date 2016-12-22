@@ -167,7 +167,7 @@ namespace Libraries.IO
             return iPathBuffer.Dequeue();
         }
 
-        protected void Run()
+        public void Run()
         {
             AddDirectory( iRootDirectory );
 

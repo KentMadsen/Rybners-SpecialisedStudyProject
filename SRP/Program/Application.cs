@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 //  ------------------------------------------------------------------------->
 /* Author      : Kent vejrup Madsen
@@ -38,14 +39,16 @@ namespace Program
         // Tags: Initialising
         public void Init( String[] Arguments )
         {
-            Input.Razor razor = new Input.Razor();
+            Input.Razor razor = new Input.Razor( @"C:\work\DataSet\Reuters\test" );
+            razor.Run();
         }
 
 //---------------------------------------------------------------------------->
 // Tags: Run
         public void Run()
         {
-
+            while (true)
+                Thread.Sleep(250);
         }
 
 //---------------------------------------------------------------------------->

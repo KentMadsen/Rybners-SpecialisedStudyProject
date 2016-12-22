@@ -1,1 +1,10 @@
 C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\Program\bin\x64\Debug\Program.exe.config
+C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\Program\bin\x64\Debug\Program.exe
+C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\Program\bin\x64\Debug\Program.pdb
+C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\Program\bin\x64\Debug\Database.dll
+C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\Program\bin\x64\Debug\Library.dll
+C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\Program\bin\x64\Debug\Database.pdb
+C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\Program\bin\x64\Debug\Library.pdb
+C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\Program\obj\x64\Debug\Program.csprojResolveAssemblyReference.cache
+C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\Program\obj\x64\Debug\Program.exe
+C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\Program\obj\x64\Debug\Program.pdb
