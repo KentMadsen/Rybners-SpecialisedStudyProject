@@ -35,10 +35,10 @@ namespace Program
 
 
 //---------------------------------------------------------------------------->
-    // Tags: Initialising
+        // Tags: Initialising
         public void Init( String[] Arguments )
         {
-
+            Input.Razor razor = new Input.Razor();
         }
 
 //---------------------------------------------------------------------------->

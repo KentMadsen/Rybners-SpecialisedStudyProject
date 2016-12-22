@@ -20,5 +20,6 @@ namespace Database
 {
     public class Database
     {
+        protected String connectionString = "";
     }
 }

@@ -6,12 +6,14 @@ using System.Threading.Tasks;
 
 namespace Program
 {
+
     class Program
     {
         static Application App = new Application();
 
         static void Main( string[] args )
         {
+
             App.Init( args );
 
             App.Run();
@@ -19,6 +21,9 @@ namespace Program
             App.End();
 
             App.Clear();
-        }
-    }
-}
+
+        } // End void Main
+
+    } // End class Program
+
+} // End Namespace
