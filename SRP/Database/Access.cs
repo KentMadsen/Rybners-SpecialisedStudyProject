@@ -20,7 +20,7 @@ using System.Data.OleDb;
 
 namespace Database
 {
-    class Access : Database
+    public class Access : Database
     {
         // Variables
         protected OleDbConnection ODCn;

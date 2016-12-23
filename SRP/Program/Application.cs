@@ -39,16 +39,26 @@ namespace Program
         // Tags: Initialising
         public void Init( String[] Arguments )
         {
-            Input.Razor razor = new Input.Razor( @"C:\work\DataSet\Reuters\test" );
-            razor.Run();
+
         }
 
 //---------------------------------------------------------------------------->
 // Tags: Run
         public void Run()
         {
+            String Path = @"C:\work\DataSet\NSF Research Award Abstracts";
+
+            Libraries.IO.SearchDirectories SDirectories = new Libraries.IO.SearchDirectories( Path );
+
+            SDirectories.useExtensionFilterForFiles = true;
+            SDirectories.FileExtensionFilter = ".txt";
+
+            SDirectories.Debug = true;
+
+            SDirectories.Run();
+
             while (true)
-                Thread.Sleep(250);
+                Thread.Sleep( 250 );
         }
 
 //---------------------------------------------------------------------------->

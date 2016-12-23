@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 
 using System.Threading.Tasks;
+
 //  ------------------------------------------------------------------------->
 /* Author      : Kent vejrup Madsen
    Type        : C#, 
@@ -21,7 +22,7 @@ using System.Threading.Tasks;
    Description : 
 */
 
-namespace Libraries.IO
+namespace Libraries.IO.Abstracts
 {
     public abstract class RecursiveDirectorySearch
     {
@@ -41,8 +42,45 @@ namespace Libraries.IO
 //  ------------------------------------------------------------------------->
 // Acessor Objects & Primitives
             // Class shared, Accessors
+                // Public
+        public int WaitMS
+        {
+            get
+            {
+                return iWaitMS;
+            }
+            set
+            {
+                iWaitMS = value;
+            }
+        }
 
-                // Initial Root Path to search 
+        public String FileExtensionFilter
+        {
+            get
+            {
+                return iFileExtensionFilter;
+            }
+            set
+            {
+                iFileExtensionFilter = value;
+            }
+        }
+
+        public Boolean useExtensionFilterForFiles
+        {
+            get
+            {
+                return iUseExtensionFilterForFiles;
+            }
+            set
+            {
+                iUseExtensionFilterForFiles = value;
+            }
+        }
+
+                // Protected
+                    // Initial Root Path to search 
         protected String RootDirectory
         {
             get
@@ -55,7 +93,7 @@ namespace Libraries.IO
             }
         }
 
-                // Functionality
+                    // Functionality
         protected Boolean TriggerOnDirectories
         {
             get
@@ -80,6 +118,7 @@ namespace Libraries.IO
             }
         }
 
+                // States
         protected Boolean Pause
         {
             get
@@ -98,10 +137,6 @@ namespace Libraries.IO
             {
                 return iErrorOccured;
             }
-            set
-            {
-                iErrorOccured = value;
-            }
         }
 
         protected Boolean Completed
@@ -110,10 +145,6 @@ namespace Libraries.IO
             {
                 return iCompleted;
             }
-            set
-            {
-                iCompleted = value;
-            }
         }
 
 //  ------------------------------------------------------------------------->
@@ -121,18 +152,22 @@ namespace Libraries.IO
             // Main Variables
         private String iRootDirectory;
 
+        private String iFileExtensionFilter = "*";
+
             // Filters
                 // Triggers -> do something
         private Boolean iTriggerDirectories = false;
         private Boolean iTriggerFiles       = false;
 
                 // Search States
-        private Boolean iCompleted      = false;
+        private Boolean iUseExtensionFilterForFiles = false;
 
+                    // Operation
+        private Boolean iCompleted      = false;
+        private Boolean iExit           = false;
         private Boolean iErrorOccured   = false;
         private Boolean iPause          = false;
-        private Boolean iExit           = false;
-        
+
             // Wait
         private int iWaitMS = 25;
         
@@ -144,6 +179,7 @@ namespace Libraries.IO
 
 //  ------------------------------------------------------------------------->
 // Shared Class Functions
+    // Queue
         protected void QueuePath( String Path )
         {
             AddDirectory( Path );
@@ -167,6 +203,7 @@ namespace Libraries.IO
             return iPathBuffer.Dequeue();
         }
 
+   // thread Options
         public void Run()
         {
             AddDirectory( iRootDirectory );
@@ -180,9 +217,8 @@ namespace Libraries.IO
         private void Refresh()
         {
             iPathBuffer.Clear();
-        } // End refresh
-
-
+        } 
+        
         // Retrieves a string from inside the buffer, and removes it's index
         private String GetCurrentString()
         {
@@ -204,7 +240,7 @@ namespace Libraries.IO
         }
 
 
-        //
+        // Searches for the Directories in a directory
         private void SearchForDirectories( String Current )
         {
             String[] directories = Directory.GetDirectories( Current );
@@ -213,9 +249,9 @@ namespace Libraries.IO
             {
                 AddDirectory( path );
             }
-        } // End SearchForDirectories
+        }
 
-        //
+        // Searches for the files in a directory
         private void SearchForFiles( String Current )
         {
             if ( iTriggerFiles == false )
@@ -225,11 +261,30 @@ namespace Libraries.IO
 
             foreach ( String file in files )
             {
-                FoundFile( file );
+                if( iUseExtensionFilterForFiles == true )
+                {
+                    string extension = Path.GetExtension( file );
+
+                    if ( String.IsNullOrWhiteSpace( extension ) )
+                        continue;
+                    
+                    if ( String.Equals( extension, iFileExtensionFilter ) || 
+                         iFileExtensionFilter == "*" )
+                    {
+                        FoundFile( file );
+                    }
+                }
+                else
+                {
+                    FoundFile( file );
+                }
             }
 
-        } // End SearchForFiles
+        } 
 
+        // Recursive function, that searches a directory, 
+        // for other directories and files. then proceeds to another 
+        // in the queue
         private void Search()
         {
             // If Empty, Exit
