@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
 //  ------------------------------------------------------------------------->
 /* Author      : Kent vejrup Madsen
    Type        : C#, 
@@ -18,7 +19,7 @@ using System.Threading.Tasks;
 
 namespace Database
 {
-    public class Database
+    public abstract class Database
     {
         protected String connectionString = "";
     }

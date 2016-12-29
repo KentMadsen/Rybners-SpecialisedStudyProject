@@ -60,9 +60,9 @@
   <ItemGroup>
     <Compile Include="Algorithm\Algorithm.cs" />
     <Compile Include="Algorithm\MachineLearning\NaiveBayes.cs" />
-    <Compile Include="IO\Directory.cs" />
-    <Compile Include="IO\Files.cs" />
-    <Compile Include="IO\SearchDirectories.cs" />
+    <Compile Include="IO\Functions\Directory.cs" />
+    <Compile Include="IO\Functions\Files.cs" />
+    <Compile Include="IO\Class\ListSearch.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="IO\Abstracts\RecursiveDirectorySearch.cs" />
   </ItemGroup>

@@ -58,9 +58,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Access.cs" />
-    <Compile Include="Database.cs" />
-    <Compile Include="Documents.cs" />
+    <Compile Include="DB\Access.cs" />
+    <Compile Include="Abstracts\Database.cs" />
     <Compile Include="Misc.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

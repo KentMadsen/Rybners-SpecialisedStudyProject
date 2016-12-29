@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+
 //  ------------------------------------------------------------------------->
 /* Author      : Kent vejrup Madsen
    Type        : C#, 
@@ -46,18 +47,18 @@ namespace Program
 // Tags: Run
         public void Run()
         {
-            String Path = @"";
+            String Path = @"E:\OneDrive\Resources\Lexical\Uncompressed\Sets\NSF Research Award Abstracts\NSF Research Award Abstracts";
 
-            Libraries.IO.SearchDirectories SDirectories = new Libraries.IO.SearchDirectories( Path );
-
-            SDirectories.useExtensionFilterForFiles = true;
-            SDirectories.addExtensionFileFilter = ".txt";
+            Libraries.IO.ListSearch SDirectories = new Libraries.IO.ListSearch( Path );
+            
+            SDirectories.UseExtensionFilterForFiles = true;
+            SDirectories.AddExtensionFileFilter = ".txt";
 
             SDirectories.Debug = true;
 
             SDirectories.Run();
-
-            while (true)
+            
+            while ( true )
                 Thread.Sleep( 250 );
         }
 

@@ -54,20 +54,34 @@ namespace Libraries.IO.Abstracts
                 iWaitMS = value;
             }
         }
+
+        public Boolean ExcludeFilter
+        {
+            get
+            {
+                return iFilterType;
+            }
+
+            set
+            {
+                iFilterType = value;
+            }
+        }
         
-        public Boolean useExtensionFilterForFiles
+        public Boolean UseExtensionFilterForFiles
         {
             get
             {
                 return iUseExtensionFilterForFiles;
             }
+
             set
             {
                 iUseExtensionFilterForFiles = value;
             }
         }
 
-        public String addExtensionFileFilter
+        public String AddExtensionFileFilter
         {
             set
             {
@@ -87,6 +101,7 @@ namespace Libraries.IO.Abstracts
                         current = current.Replace( " ", "" );
 
                         this.ExtensionFilter.Add( current );
+                        
                     }
                 }
                 else
@@ -112,6 +127,7 @@ namespace Libraries.IO.Abstracts
             {
                 return iTriggerDirectories;
             }
+
             set
             {
                 iTriggerDirectories = value;
@@ -124,6 +140,7 @@ namespace Libraries.IO.Abstracts
             {
                 return iTriggerFiles;
             }
+
             set
             {
                 iTriggerFiles = value;
@@ -137,6 +154,7 @@ namespace Libraries.IO.Abstracts
             {
                 return iPause;
             }
+
             set
             {
                 iPause = value;
@@ -179,7 +197,7 @@ namespace Libraries.IO.Abstracts
         
         // false : include
         // true  : exclude
-        private Boolean iExcludeFilter = false;
+        private Boolean iFilterType = false;
 
             // Wait
         private int iWaitMS = 25;
@@ -277,30 +295,44 @@ namespace Libraries.IO.Abstracts
 
             foreach ( String filePath in files )
             {
-                if( iUseExtensionFilterForFiles )
+
+                FilterFiles( filePath );
+
+            } // end foreach
+        }
+
+        private void FilterFiles( string filePath )
+        {
+
+            if ( iUseExtensionFilterForFiles )
+            {
+
+               if( ExcludeFilter )
                 {
-                    if( isAmongAllowedExtensions( filePath ) )
+                    // True
+                    if( isAmongExtensions( filePath ) == false )
                     {
-                        if( iExcludeFilter != true )
-                        {
-                            FoundFile( filePath );
-                        }
-                    }
-                    else
-                    {
-                        if( iExcludeFilter )
-                            FoundFile( filePath );
+                        FoundFile( filePath );
                     }
                 }
-                else
+               else
                 {
-                    FoundFile( filePath );
+                    // False
+                    if( isAmongExtensions( filePath ) == true )
+                    {
+                        FoundFile( filePath );
+                    }
                 }
+
+            }
+            else
+            {
+                FoundFile( filePath );
             }
 
         }
 
-        private Boolean isAmongAllowedExtensions(String path)
+        private Boolean isAmongExtensions( String path )
         {
             int length = this.ExtensionFilter.Count;
 
@@ -309,18 +341,18 @@ namespace Libraries.IO.Abstracts
 
             length = length - 1;
 
-            String extension = Path.GetExtension(path);
-
+            String extension = Path.GetExtension( path );
+            
             for ( int x = 0;
                       x <= length;
                       x++ )
             {
                 String current = this.ExtensionFilter[x];
 
-                if ( String.Equals( path, current ) )
-                {
+                if ( String.Equals( current, 
+                                    extension ) )
                     return true;
-                }
+                
             }
 
             return false;
@@ -353,10 +385,10 @@ namespace Libraries.IO.Abstracts
             // Retrieve Directories, Insert into buffer
             SearchForDirectories( current );
             
-            // Do something, with the current directory ?
+            // Do something, with the current directory 
             if ( iTriggerDirectories == true )
                 FoundDirectory( current );
-
+            
             // search for files, in the current Path
             SearchForFiles( current );
             
@@ -368,7 +400,7 @@ namespace Libraries.IO.Abstracts
             End:
             if ( iPathBuffer.Count != 0 )
                 Search();
-
+            
             lExit:
             this.iExit = false;
                 return;

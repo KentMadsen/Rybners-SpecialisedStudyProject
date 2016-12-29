@@ -17,7 +17,7 @@ using System.IO;
 
 namespace Libraries.IO
 {
-    public class SearchDirectories : Abstracts.RecursiveDirectorySearch
+    public class ListSearch : Abstracts.RecursiveDirectorySearch
     {
 //  ------------------------------------------------------------------------->
 // Accessors
@@ -74,12 +74,12 @@ namespace Libraries.IO
 
 //  ------------------------------------------------------------------------->
 // Constructors
-        public SearchDirectories()
+        public ListSearch()
         {
             Initialise();
         }
 
-        public SearchDirectories( String s )
+        public ListSearch( String s )
         {
             Initialise();
 
@@ -91,17 +91,21 @@ namespace Libraries.IO
         protected override void FoundDirectory( string Directory )
         {
             if ( iDebug == true )
-                Console.WriteLine( "Found:{0}", Directory );
+                Console.WriteLine( "Found:{0}", 
+                                    Directory );
 
             listOfDirectories.Add( Directory );
         }
 
         protected override void FoundFile( string File )
         {
-            if (iDebug == true)
-                Console.WriteLine("Found:{0}", File);
+            if ( iDebug == true )
+                Console.WriteLine( "Found:{0}", 
+                                    File );
 
             listOfFiles.Add( File );
         }
+
     }
+
 }
