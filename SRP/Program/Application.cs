@@ -46,12 +46,12 @@ namespace Program
 // Tags: Run
         public void Run()
         {
-            String Path = @"C:\work\DataSet\NSF Research Award Abstracts";
+            String Path = @"";
 
             Libraries.IO.SearchDirectories SDirectories = new Libraries.IO.SearchDirectories( Path );
 
             SDirectories.useExtensionFilterForFiles = true;
-            SDirectories.FileExtensionFilter = ".txt";
+            SDirectories.addExtensionFileFilter = ".txt";
 
             SDirectories.Debug = true;
 

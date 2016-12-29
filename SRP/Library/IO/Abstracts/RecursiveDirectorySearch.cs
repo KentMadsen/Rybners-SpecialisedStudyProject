@@ -54,19 +54,7 @@ namespace Libraries.IO.Abstracts
                 iWaitMS = value;
             }
         }
-
-        public String FileExtensionFilter
-        {
-            get
-            {
-                return iFileExtensionFilter;
-            }
-            set
-            {
-                iFileExtensionFilter = value;
-            }
-        }
-
+        
         public Boolean useExtensionFilterForFiles
         {
             get
@@ -79,20 +67,44 @@ namespace Libraries.IO.Abstracts
             }
         }
 
+        public String addExtensionFileFilter
+        {
+            set
+            {
+                if( value.Contains( '|' ) )
+                {
+                    string[] extensions = value.Split( '|' );
+
+                    for( int i = 0; 
+                             i <= extensions.Length - 1; 
+                             i ++ )
+                    {
+                        string current = extensions[i];
+
+                        if ( String.IsNullOrWhiteSpace( current ) )
+                            continue;
+
+                        current = current.Replace( " ", "" );
+
+                        this.ExtensionFilter.Add( current );
+                    }
+                }
+                else
+                {
+                    this.ExtensionFilter.Add( value );
+                }
+            }
+
+        } // end addExtensionFileFilter
+
                 // Protected
-                    // Initial Root Path to search 
-        protected String RootDirectory
+        protected List<String> OriginalSources
         {
             get
             {
-                return iRootDirectory;
-            }
-            set
-            {
-                iRootDirectory = value;
+                return this.SourceDirectories;
             }
         }
-
                     // Functionality
         protected Boolean TriggerOnDirectories
         {
@@ -149,11 +161,8 @@ namespace Libraries.IO.Abstracts
 
 //  ------------------------------------------------------------------------->
 // Variables
-            // Main Variables
-        private String iRootDirectory;
-
-        private String iFileExtensionFilter = "*";
-
+    // Main Variables
+        
             // Filters
                 // Triggers -> do something
         private Boolean iTriggerDirectories = false;
@@ -167,13 +176,20 @@ namespace Libraries.IO.Abstracts
         private Boolean iExit           = false;
         private Boolean iErrorOccured   = false;
         private Boolean iPause          = false;
+        
+        // false : include
+        // true  : exclude
+        private Boolean iExcludeFilter = false;
 
             // Wait
         private int iWaitMS = 25;
-        
+
+        private List<String> SourceDirectories = new List<string>();
+        private List<String> ExtensionFilter   = new List<string>();
+
             // Buffers
         private Queue<String> iPathBuffer = new Queue<String>();
-        
+
             // Children
         private Thread iChildWorker;
 
@@ -182,6 +198,8 @@ namespace Libraries.IO.Abstracts
     // Queue
         protected void QueuePath( String Path )
         {
+            SourceDirectories.Add( Path );
+
             AddDirectory( Path );
         }
 
@@ -189,7 +207,7 @@ namespace Libraries.IO.Abstracts
         {
             foreach ( String path in Paths )
             {
-                AddDirectory( path );
+                QueuePath( path );
             }
         }
         
@@ -206,8 +224,6 @@ namespace Libraries.IO.Abstracts
    // thread Options
         public void Run()
         {
-            AddDirectory( iRootDirectory );
-
             iChildWorker.Start();
         }
 
@@ -259,28 +275,57 @@ namespace Libraries.IO.Abstracts
 
             String[] files = Directory.GetFiles( Current );
 
-            foreach ( String file in files )
+            foreach ( String filePath in files )
             {
-                if( iUseExtensionFilterForFiles == true )
+                if( iUseExtensionFilterForFiles )
                 {
-                    string extension = Path.GetExtension( file );
-
-                    if ( String.IsNullOrWhiteSpace( extension ) )
-                        continue;
-                    
-                    if ( String.Equals( extension, iFileExtensionFilter ) || 
-                         iFileExtensionFilter == "*" )
+                    if( isAmongAllowedExtensions( filePath ) )
                     {
-                        FoundFile( file );
+                        if( iExcludeFilter != true )
+                        {
+                            FoundFile( filePath );
+                        }
+                    }
+                    else
+                    {
+                        if( iExcludeFilter )
+                            FoundFile( filePath );
                     }
                 }
                 else
                 {
-                    FoundFile( file );
+                    FoundFile( filePath );
                 }
             }
 
-        } 
+        }
+
+        private Boolean isAmongAllowedExtensions(String path)
+        {
+            int length = this.ExtensionFilter.Count;
+
+            if ( length == 0 )
+                return true;
+
+            length = length - 1;
+
+            String extension = Path.GetExtension(path);
+
+            for ( int x = 0;
+                      x <= length;
+                      x++ )
+            {
+                String current = this.ExtensionFilter[x];
+
+                if ( String.Equals( path, current ) )
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
 
         // Recursive function, that searches a directory, 
         // for other directories and files. then proceeds to another 
