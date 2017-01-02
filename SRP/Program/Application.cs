@@ -47,16 +47,7 @@ namespace Program
 // Tags: Run
         public void Run()
         {
-            String Path = @"E:\OneDrive\Resources\Lexical\Uncompressed\Sets\NSF Research Award Abstracts\NSF Research Award Abstracts";
-
-            Libraries.IO.ListSearch SDirectories = new Libraries.IO.ListSearch( Path );
             
-            SDirectories.UseExtensionFilterForFiles = true;
-            SDirectories.AddExtensionFileFilter = ".txt";
-
-            SDirectories.Debug = true;
-
-            SDirectories.Run();
             
             while ( true )
                 Thread.Sleep( 250 );

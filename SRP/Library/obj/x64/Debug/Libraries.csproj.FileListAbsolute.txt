@@ -2,3 +2,4 @@ C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\Library\bin\x64\Debug\Lib
 C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\Library\bin\x64\Debug\Library.pdb
 C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\Library\obj\x64\Debug\Library.dll
 C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\Library\obj\x64\Debug\Library.pdb
+C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\Library\obj\x64\Debug\Libraries.csprojResolveAssemblyReference.cache

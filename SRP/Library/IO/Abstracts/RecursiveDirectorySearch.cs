@@ -100,24 +100,36 @@ namespace Libraries.IO.Abstracts
 
                         current = current.Replace( " ", "" );
 
-                        this.ExtensionFilter.Add( current );
+                        this.iExtensionFilter.Add( current );
                         
                     }
                 }
                 else
                 {
-                    this.ExtensionFilter.Add( value );
+                    string current = value;
+
+                    current = current.Replace( " ", "" );
+
+                    this.iExtensionFilter.Add( current );
                 }
             }
 
         } // end addExtensionFileFilter
+
+        public List<String> GetExtensionFileFilter
+        {
+            get
+            {
+                return iExtensionFilter;
+            }
+        }
 
                 // Protected
         protected List<String> OriginalSources
         {
             get
             {
-                return this.SourceDirectories;
+                return this.iSourceDirectories;
             }
         }
                     // Functionality
@@ -202,8 +214,8 @@ namespace Libraries.IO.Abstracts
             // Wait
         private int iWaitMS = 25;
 
-        private List<String> SourceDirectories = new List<string>();
-        private List<String> ExtensionFilter   = new List<string>();
+        private List<String> iSourceDirectories = new List<string>();
+        private List<String> iExtensionFilter   = new List<string>();
 
             // Buffers
         private Queue<String> iPathBuffer = new Queue<String>();
@@ -216,7 +228,7 @@ namespace Libraries.IO.Abstracts
     // Queue
         protected void QueuePath( String Path )
         {
-            SourceDirectories.Add( Path );
+            iSourceDirectories.Add( Path );
 
             AddDirectory( Path );
         }
@@ -334,7 +346,7 @@ namespace Libraries.IO.Abstracts
 
         private Boolean isAmongExtensions( String path )
         {
-            int length = this.ExtensionFilter.Count;
+            int length = this.iExtensionFilter.Count;
 
             if ( length == 0 )
                 return true;
@@ -347,7 +359,7 @@ namespace Libraries.IO.Abstracts
                       x <= length;
                       x++ )
             {
-                String current = this.ExtensionFilter[x];
+                String current = this.iExtensionFilter[x];
 
                 if ( String.Equals( current, 
                                     extension ) )
