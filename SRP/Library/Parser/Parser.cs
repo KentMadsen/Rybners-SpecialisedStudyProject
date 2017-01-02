@@ -4,8 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using Libraries.Parser.Objects;
-
 namespace Libraries.Parser
 {
     public class Parser

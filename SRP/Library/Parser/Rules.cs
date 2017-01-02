@@ -18,6 +18,8 @@ namespace Libraries.Parser
         {
 
         }
+
+
         
         // 
         private bool isWithinAllowedCharacters( char c )
@@ -69,7 +71,7 @@ namespace Libraries.Parser
             int length = ListOfIndividuals.Count;
 
             for( int index = 0; 
-                     index <= length-1; 
+                     index <= length - 1; 
                      index ++ )
             {
                 char current = ListOfIndividuals[index].Character;
@@ -87,7 +89,7 @@ namespace Libraries.Parser
         {
             char iChar;
 
-            public void Set(char C)
+            public void Set( char C )
             {
                 iChar = C;
             }
@@ -107,7 +109,8 @@ namespace Libraries.Parser
             char iBegin, 
                  iEnd;
 
-            public void Set(char Begin, char End)
+            public void Set( char Begin, 
+                             char End )
             {
                 iBegin = Begin;
                 iEnd = End;
@@ -132,7 +135,21 @@ namespace Libraries.Parser
 
         public struct Packages
         {
+            String iToken;
 
+            public void Set( String t )
+            {
+                iToken = t;
+            }
+
+            public String Token
+            {
+                get
+                {
+                    return iToken;
+                }
+
+            }
         }
     }
 
