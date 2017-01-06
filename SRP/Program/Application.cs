@@ -24,36 +24,30 @@ namespace Program
     class Application
     {
 //---------------------------------------------------------------------------->
+// Variables
+    // States
+        private Boolean ErrorOccured = false;
+
+        private Dictionary.Library DicLib = new Dictionary.Library();
+        
+//---------------------------------------------------------------------------->
 // Constructors
         public Application()
         {
 
         }
-
-//---------------------------------------------------------------------------->
-// Variables
-    // States
-        private Boolean ErrorOccured = false;
-
-
+        
 //---------------------------------------------------------------------------->
         // Tags: Initialising
         public void Init( String[] Arguments )
         {
-
+            
         }
 
 //---------------------------------------------------------------------------->
 // Tags: Run
         public void Run()
         {
-            int x = 0;
-
-            while(x < 5)
-            {
-                Console.WriteLine("x={0}", x);
-                x++;
-            }
 
             while (true) ;
         }

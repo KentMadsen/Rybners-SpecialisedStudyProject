@@ -60,7 +60,7 @@
   <ItemGroup>
     <Compile Include="DB\Access.cs" />
     <Compile Include="Abstracts\Database.cs" />
-    <Compile Include="Misc.cs" />
+    <Compile Include="Other\Misc.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

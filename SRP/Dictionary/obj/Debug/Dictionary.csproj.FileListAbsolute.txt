@@ -1,0 +1,5 @@
+C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\Dictionary\bin\Debug\Dictionary.dll
+C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\Dictionary\bin\Debug\Dictionary.pdb
+C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\Dictionary\obj\Debug\Dictionary.csprojResolveAssemblyReference.cache
+C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\Dictionary\obj\Debug\Dictionary.dll
+C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\Dictionary\obj\Debug\Dictionary.pdb
