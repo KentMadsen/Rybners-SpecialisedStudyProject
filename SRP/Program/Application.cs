@@ -47,8 +47,15 @@ namespace Program
 // Tags: Run
         public void Run()
         {
-            
-            
+            int x = 0;
+
+            while(x < 5)
+            {
+                Console.WriteLine("x={0}", x);
+                x++;
+            }
+
+            while (true) ;
         }
 
 //---------------------------------------------------------------------------->
