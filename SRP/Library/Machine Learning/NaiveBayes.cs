@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Library.Algorithm.MachineLearning
 {
-    class NaiveBayes : Algorithm
+    class NaiveBayes
     {
 
     }
