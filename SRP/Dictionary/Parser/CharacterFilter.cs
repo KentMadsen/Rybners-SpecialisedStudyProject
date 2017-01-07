@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Dictionary.Parser
 {
-    public class Allowed
+    public class CharacterFilter
     {
-        public Allowed()
+        public CharacterFilter()
         {
 
         }
