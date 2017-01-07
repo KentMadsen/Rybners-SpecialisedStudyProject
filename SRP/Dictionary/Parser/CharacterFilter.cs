@@ -8,35 +8,105 @@ namespace Dictionary.Parser
 {
     public class CharacterFilter
     {
+        // Variables
+        List<Structures.Ranges> iCharacterRanges          = new List<Structures.Ranges>();
+        List<Structures.Individuals> iCharacterIndividuals = new List<Structures.Individuals>();
+            
+        // Constructors
         public CharacterFilter()
         {
 
         }
 
-        List<Structures.Ranges> iCharacterRanges          = new List<Structures.Ranges>();
-        List<Structures.Individuals> iCharacterIndividuals = new List<Structures.Individuals>();
+        public CharacterFilter( char Begin, 
+                                char End, 
+                                bool CaseSensative )
+        {
+            AddRanges( Begin, End, 
+                       CaseSensative );
+        }
 
-        private Boolean InIndividuals( char current )
+        public CharacterFilter( char Individual, 
+                                bool CaseSensative )
+        {
+            AddIndividuals( Individual, 
+                            CaseSensative );
+        }
+
+        // 
+        public void AddIndividuals( char Individual, 
+                                    bool CaseSensative )
+        {
+            Structures.Individuals Ivls = new Structures.Individuals();
+
+            Ivls.Init( Individual, 
+                      CaseSensative );
+
+            iCharacterIndividuals.Add( Ivls );
+        }
+
+        public void AddRanges( char Begin, 
+                               char End, 
+                               bool CaseSensative )
+        {
+            Structures.Ranges Rng = new Structures.Ranges();
+
+            Rng.Init( Begin, 
+                      End, 
+                      CaseSensative );
+
+            iCharacterRanges.Add( Rng );
+        }
+
+        public void ClearIndividuals()
+        {
+            iCharacterIndividuals.Clear();
+        }
+
+        public void ClearRanges()
+        {
+            iCharacterRanges.Clear();
+        }
+
+        public void ClearBoth()
+        {
+            ClearIndividuals();
+            ClearRanges();
+        }
+
+        // Functions
+        public Boolean Filter( char character )
+        {
+            if ( insideRange( character ) )
+                return true;
+
+            if ( inIndividuals( character ) )
+                return true;
+
+            return false;
+        }
+
+        private Boolean inIndividuals( char current )
         {
             bool sensative = false;
             int length = iCharacterIndividuals.Count - 1;
 
-            for( int x = 0; 
-                     x <= length; 
-                     x ++ )
+            for( int index = 0; 
+                     index <= length; 
+                     index ++ )
             {
-                sensative = iCharacterIndividuals[x].CaseSensative;
+                sensative = iCharacterIndividuals[index].CaseSensative;
                 
                 if ( sensative )
                 {
-                    if ( InsideIndividual( current, 
-                                           iCharacterIndividuals[x].Character ) )
+                    if ( isCharactersEqual( current, 
+                                           iCharacterIndividuals[index].Character ) )
                         return true;
                 }
                 else
                 {
-                    if ( InIndividualsInsensative( current, 
-                                                   iCharacterIndividuals[x].Character ) )
+                    if ( inIndividualsInsensative( current, 
+                                                   iCharacterIndividuals[index].Character ) )
                         return true;
                 }
             }
@@ -44,7 +114,8 @@ namespace Dictionary.Parser
             return false;
         }
 
-        private Boolean InIndividualsInsensative( char current, char character )
+        private Boolean inIndividualsInsensative( char current, 
+                                                  char character )
         {
             char lowerCurrent, 
                  lowerCharacter;
@@ -52,14 +123,14 @@ namespace Dictionary.Parser
             lowerCurrent = Char.ToLower( current );
             lowerCharacter = Char.ToLower( character );
 
-            if ( InsideIndividual( lowerCurrent, 
+            if ( isCharactersEqual( lowerCurrent, 
                                    lowerCharacter ) )
                 return true;
 
             return false;
         }
 
-        private Boolean InsideIndividual( char current, char character )
+        private Boolean isCharactersEqual( char current, char character )
         {
             if ( current == character )
                 return true;
@@ -67,38 +138,36 @@ namespace Dictionary.Parser
             return false;
         }
 
-        private Boolean inRange( char currentChar )
+        private Boolean insideRange( char currentChar )
         {
             bool sensative = false;
             int length = iCharacterIndividuals.Count - 1;
 
-            for ( int x = 0; 
-                      x <= length; 
-                      x ++ )
+            foreach( Structures.Ranges currentRng in iCharacterRanges )
             {
-                sensative = iCharacterRanges[x].CaseSensative;
-                
+                sensative = currentRng.CaseSensative;
+
                 if( sensative )
                 {
-                    if ( InsideRange( currentChar,
-                                      iCharacterRanges[x].Begin,
-                                      iCharacterRanges[x].End ) )
+                    if ( isCharactersInsideRange( currentChar, 
+                                                  currentRng.Begin, 
+                                                  currentRng.End ) )
                         return true;
                 }
                 else
                 {
-                    if ( InsideRangeInsensative( currentChar,
-                                                 iCharacterRanges[x].Begin,
-                                                 iCharacterRanges[x].End ) )
+                    if ( insideRangeInsensative( currentChar, 
+                                                 currentRng.Begin, 
+                                                 currentRng.End ) )
                         return true;
                 }
-               
+
             }
 
             return false;
         }
 
-        private Boolean InsideRangeInsensative( char current, 
+        private Boolean insideRangeInsensative( char current, 
                                                 char begin, 
                                                 char end )
         {
@@ -110,17 +179,17 @@ namespace Dictionary.Parser
             lowerBegin = char.ToLower( begin );
             lowerEnd   = char.ToLower( end );
 
-            if ( InsideRange( lowerCurrent, 
-                              lowerBegin, 
-                              lowerEnd ) )
+            if ( isCharactersInsideRange( lowerCurrent, 
+                                          lowerBegin, 
+                                          lowerEnd ) )
                 return true;
 
             return false;
         }
 
-        private Boolean InsideRange( char current, 
-                                     char begin, 
-                                     char end )
+        private Boolean isCharactersInsideRange( char current, 
+                                                 char begin, 
+                                                 char end )
         {
             if ( begin <= current || 
                  current >= end )
@@ -128,18 +197,7 @@ namespace Dictionary.Parser
 
             return false;
         }
-
-        public Boolean isAllowed( char character )
-        {
-            if ( inRange( character ) )
-                return true;
-
-            if ( InIndividuals( character ) )
-                return true;
-
-            return false;
-        }
-
+        
     } // End Class
 
 } // End Namespace

@@ -8,7 +8,7 @@ namespace Dictionary.Parser
 {
     public class Lexer
     {
-        Allowed allow = new Allowed();
+        CharacterFilter charFilter = new CharacterFilter();
 
         // Constructor
         public Lexer()
