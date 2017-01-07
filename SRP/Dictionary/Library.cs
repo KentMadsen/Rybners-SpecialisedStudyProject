@@ -12,13 +12,6 @@ namespace Dictionary
 {
     public class Library
     {
-        enum TypeSet
-        {
-            None,
-            Danish,
-            English
-        };
-
         // Variables
         private String iLibraryPath;
         
@@ -58,7 +51,7 @@ namespace Dictionary
         // ----------------------------------------------------> Initialise
         private void Initialise()
         {
-            if( dirRequire( LibraryPath ) != true )
+            if( IO.Require( LibraryPath ) != true )
             {
                 // Error
                 return;
@@ -74,76 +67,80 @@ namespace Dictionary
 
             return true;
         }
-
-        // Other Functions
-        private Boolean dirRequire( String Path )
+        
+        private static class IO
         {
-            if( ioExist( Path ) )
+            // Other Functions
+            public static Boolean Require( String Path )
             {
-                return true;
-            }
-            else
-            {
-                return dirCreate( Path );
-            }
-        }
-
-        private Boolean dirCreate( String Path )
-        {
-            try
-            {
-                Directory.CreateDirectory( Path );
-
-                return true;
-            }
-            catch( PathTooLongException PTLEx )
-            {
-
-            }
-            catch( DirectoryNotFoundException DNFEx )
-            {
-
-            }
-            catch( IOException IOEx )
-            {
-
-            }
-            catch( UnauthorizedAccessException UAEx )
-            {
-
-            }
-            catch( ArgumentNullException ANEx )
-            {
-
-            }
-            catch( ArgumentException AEx )
-            {
-
-            }
-            catch( NotSupportedException NSEx )
-            {
-
-            }
-           
-            return false;
-        }
-
-        // Checks if a file or directory Exist
-        private Boolean ioExist( String Path )
-        {
-            if( File.Exists( Path ) )
-            {
-                return true;
+                if ( Exist( Path ) )
+                {
+                    return true;
+                }
+                else
+                {
+                    return Create( Path );
+                }
             }
 
-            if( Directory.Exists( Path ) )
+            public static Boolean Create( String Path )
             {
-                return true;
+                try
+                {
+                    Directory.CreateDirectory( Path );
+
+                    return true;
+                }
+                catch ( PathTooLongException PTLEx )
+                {
+
+                }
+                catch ( DirectoryNotFoundException DNFEx )
+                {
+
+                }
+                catch ( IOException IOEx )
+                {
+
+                }
+                catch ( UnauthorizedAccessException UAEx )
+                {
+
+                }
+                catch ( ArgumentNullException ANEx )
+                {
+
+                }
+                catch ( ArgumentException AEx )
+                {
+
+                }
+                catch ( NotSupportedException NSEx )
+                {
+
+                }
+
+                return false;
             }
-            
-            return false;
+
+            // Checks if a file or directory Exist
+            public static Boolean Exist( String Path )
+            {
+                if ( File.Exists( Path ) )
+                {
+                    return true;
+                }
+
+                if ( Directory.Exists( Path ) )
+                {
+                    return true;
+                }
+
+                return false;
+            }
         }
         
+
     } // End Class
 
 } // End Namespace
