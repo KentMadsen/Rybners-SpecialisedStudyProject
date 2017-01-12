@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Dictionary.Parser
 {
@@ -10,6 +6,7 @@ namespace Dictionary.Parser
     {
         public struct Ranges
         {
+            // Variables
             private Char iBegin,
                          iEnd;
 
@@ -41,16 +38,17 @@ namespace Dictionary.Parser
             }
 
             // Functions
-            public void Init(char begin,
+            public void Init( char begin,
                               char end,
-                              bool caseSensative)
+                              bool caseSensative )
             {
                 iBegin = begin;
                 iEnd = end;
 
                 iCaseSensative = caseSensative;
             }
-        }
+
+        } // Ranges
 
         public struct Individuals
         {
@@ -77,12 +75,16 @@ namespace Dictionary.Parser
             }
 
             // Functions
-            public void Init(char Character, bool Sensative)
+            public void Init( char Character, 
+                              bool Sensative )
             {
                 iChar = Character;
                 iCaseSensative = Sensative;
             }
 
-        }
-    }
-}
+        } // Individuals
+
+
+    } // Class Structures
+
+} // End Namespace

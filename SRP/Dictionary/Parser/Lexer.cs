@@ -13,7 +13,7 @@ namespace Dictionary.Parser
         // Constructor
         public Lexer()
         {
-
+            
         }
 
         

@@ -27,8 +27,6 @@ namespace Program
 // Variables
     // States
         private Boolean ErrorOccured = false;
-
-        private Dictionary.Library DicLib = new Dictionary.Library();
         
 //---------------------------------------------------------------------------->
 // Constructors
@@ -41,15 +39,15 @@ namespace Program
         // Tags: Initialising
         public void Init( String[] Arguments )
         {
-            
+
         }
 
 //---------------------------------------------------------------------------->
 // Tags: Run
         public void Run()
         {
-
-            while (true) ;
+            
+            
         }
 
 //---------------------------------------------------------------------------->
