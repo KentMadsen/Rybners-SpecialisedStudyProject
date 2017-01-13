@@ -32,7 +32,7 @@ namespace Dictionary.Parser
         // Constructors
         public CharacterFilter()
         {
-            
+            // Empty ...
         }
 
         public CharacterFilter( char Begin, 
@@ -51,21 +51,39 @@ namespace Dictionary.Parser
         }
 
         // Primary Functions
-            // Add
+            // Wrappers
+        private void AddInvidivual( Structures.Individuals AddIndividual )
+        {
+            iCharacterIndividuals.Add( AddIndividual );
+        }
+
+        private void AddRange( Structures.Ranges AddRange )
+        {
+            iCharacterRanges.Add( AddRange );
+        }
+
+        // Add
+        public void Add()
+        {
+
+        }
+
+
+        //
         public void AddIndividuals( char Individual, 
-                                     bool CaseSensative )
+                                    bool CaseSensative )
         {
             Structures.Individuals Ivls = new Structures.Individuals();
 
             Ivls.Init( Individual, 
                        CaseSensative );
 
-            iCharacterIndividuals.Add( Ivls );
+            AddInvidivual( Ivls );
         }
 
         public void AddRanges( char Begin, 
-                                char End, 
-                                bool CaseSensative )
+                               char End, 
+                               bool CaseSensative )
         {
             Structures.Ranges Rng = new Structures.Ranges();
 
@@ -73,7 +91,7 @@ namespace Dictionary.Parser
                       End, 
                       CaseSensative );
 
-            iCharacterRanges.Add( Rng );
+            AddRange( Rng );
         }
 
             // Remove
@@ -107,7 +125,8 @@ namespace Dictionary.Parser
 
         }
 
-        public void RemoveRanges( char CharBegin, char CharEnd )
+        public void RemoveRanges( char CharBegin, 
+                                  char CharEnd )
         {
 
             for( int index = ( LengthOfRanges - 1 ); 
@@ -200,7 +219,7 @@ namespace Dictionary.Parser
             return false;
         }
 
-        // Sensative Version
+            // Lowers Characters 
         private Boolean insideRangeInsensative( char current, 
                                                 char begin, 
                                                 char end )
@@ -261,7 +280,8 @@ namespace Dictionary.Parser
 
             return false;
         }
-        
+
+            // Lowers Characters
         private Boolean inIndividualsInsensative( char current, 
                                                   char character )
         {

@@ -8,11 +8,12 @@ namespace Dictionary.Parser
 {
     public class Lexer
     {
-        CharacterFilter charFilter = new CharacterFilter();
+        CharacterFilter Filter = new CharacterFilter();
 
         // Constructor
         public Lexer()
         {
+            
             
         }
 
