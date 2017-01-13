@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Dictionary.Parser
 {
-    public class CharacterFilter
+    public class Filter
     {
         // Variables
         private List< Structures.Ranges > iCharacterRanges           = new List< Structures.Ranges >();
@@ -30,21 +30,21 @@ namespace Dictionary.Parser
         }
 
         // Constructors
-        public CharacterFilter()
+        public Filter()
         {
-            // Empty ...
-        }
 
-        public CharacterFilter( char Begin, 
-                                char End, 
-                                bool CaseSensative )
+        }
+        
+        public Filter( char Begin, 
+                       char End, 
+                       bool CaseSensative )
         {
             AddRanges( Begin, End, 
                        CaseSensative );
         }
 
-        public CharacterFilter( char Individual, 
-                                bool CaseSensative )
+        public Filter( char Individual, 
+                       bool CaseSensative )
         {
             AddIndividuals( Individual, 
                             CaseSensative );
@@ -154,8 +154,8 @@ namespace Dictionary.Parser
 
         }
 
-        public void RemoveRanges( char CharBegin, 
-                                  char CharEnd )
+        public void RemoveRanges( char Begin, 
+                                  char End )
         {
 
             for( int index = ( LengthOfRanges - 1 ); 
@@ -163,8 +163,8 @@ namespace Dictionary.Parser
                      index -- )
             {
 
-                if ( ( iCharacterRanges[index].Begin == CharBegin ) && 
-                     ( iCharacterRanges[index].End == CharEnd ) )
+                if ( ( iCharacterRanges[index].Begin == Begin ) && 
+                     ( iCharacterRanges[index].End == End ) )
                 {
                     iCharacterRanges.RemoveAt( index );
                 }
@@ -208,19 +208,19 @@ namespace Dictionary.Parser
         }
 
         // Functions
-        public Boolean Run( char character )
+        public Boolean Run( char Character )
         {
-            if ( insideRange( character ) )
+            if ( isInsideRange( Character ) )
                 return true;
 
-            if ( insideIndividuals( character ) )
+            if ( isInsideIndividuals( Character ) )
                 return true;
 
             return false;
         }
 
             // Character Range, inside x -> y
-        private Boolean insideRange( char currentChar )
+        private Boolean isInsideRange( char Character )
         {
             bool sensative = false;
 
@@ -230,14 +230,14 @@ namespace Dictionary.Parser
 
                 if( sensative )
                 {
-                    if ( isCharacterInsideRange( currentChar, 
+                    if ( isCharacterInsideRange( Character, 
                                                  currentRng.Begin, 
                                                  currentRng.End ) )
                         return true;
                 }
                 else
                 {
-                    if ( insideRangeInsensative( currentChar, 
+                    if ( insideRangeInsensative( Character, 
                                                  currentRng.Begin, 
                                                  currentRng.End ) )
                         return true;
@@ -285,7 +285,7 @@ namespace Dictionary.Parser
         }
 
         // Individual Characters
-        private Boolean insideIndividuals( char current )
+        private Boolean isInsideIndividuals( char Character )
         {
             bool sensative = false;
 
@@ -295,13 +295,13 @@ namespace Dictionary.Parser
                 
                 if ( sensative )
                 {
-                    if ( isCharactersEqual( current, 
+                    if ( isCharactersEqual( Character, 
                                             Ind.Character ) )
                         return true;
                 }
                 else
                 {
-                    if ( inIndividualsInsensative( current, 
+                    if ( inIndividualsInsensative( Character, 
                                                    Ind.Character ) )
                         return true;
                 }

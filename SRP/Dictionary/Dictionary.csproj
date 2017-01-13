@@ -43,7 +43,7 @@
     <Compile Include="Constants.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="Library.cs" />
-    <Compile Include="Parser\CharacterFilter.cs" />
+    <Compile Include="Parser\Filter.cs" />
     <Compile Include="Parser\Lexer.cs" />
     <Compile Include="Parser\Structures.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
