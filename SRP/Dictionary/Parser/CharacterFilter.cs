@@ -51,25 +51,12 @@ namespace Dictionary.Parser
         }
 
         // Primary Functions
-            // Wrappers
-        private void AddInvidivual( Structures.Individuals AddIndividual )
+            // Add
+        private void AddIndividuals( Structures.Individuals AddIndividual )
         {
             iCharacterIndividuals.Add( AddIndividual );
         }
-
-        private void AddRange( Structures.Ranges AddRange )
-        {
-            iCharacterRanges.Add( AddRange );
-        }
-
-        // Add
-        public void Add()
-        {
-
-        }
-
-
-        //
+        
         public void AddIndividuals( char Individual, 
                                     bool CaseSensative )
         {
@@ -78,7 +65,12 @@ namespace Dictionary.Parser
             Ivls.Init( Individual, 
                        CaseSensative );
 
-            AddInvidivual( Ivls );
+            AddIndividuals( Ivls );
+        }
+
+        private void AddRanges( Structures.Ranges AddRange )
+        {
+            iCharacterRanges.Add( AddRange );
         }
 
         public void AddRanges( char Begin, 
@@ -91,11 +83,48 @@ namespace Dictionary.Parser
                       End, 
                       CaseSensative );
 
-            AddRange( Rng );
+            AddRanges( Rng );
         }
 
-            // Remove
-                // Indexes
+                // Wrappers
+        public void Add( Structures.Individuals Individual )
+        {
+            AddIndividuals( Individual );
+        }
+
+        public void Add( char Character )
+        {
+            AddIndividuals( Character, 
+                            false );
+        }
+        
+        public void Add( char Character, 
+                         bool Sensative )
+        {
+            AddIndividuals( Character, 
+                            Sensative );
+        }
+
+        public void Add( Structures.Ranges Range )
+        {
+            AddRanges( Range );
+        }
+
+        public void Add( char Begin, char End )
+        {
+            AddRanges( Begin, End, 
+                       false );
+        }
+
+        public void Add( char Begin, char End, 
+                         bool Sensative )
+        {
+            AddRanges( Begin, End, 
+                       Sensative );
+        }
+        
+        // Remove
+            // Indexes
         public void RemoveRanges( int index )
         {
             iCharacterRanges.RemoveAt( index );

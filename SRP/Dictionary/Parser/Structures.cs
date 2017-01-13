@@ -2,7 +2,7 @@
 
 namespace Dictionary.Parser
 {
-    class Structures
+    public static class Structures
     {
         public struct Ranges
         {
