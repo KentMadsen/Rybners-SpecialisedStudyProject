@@ -4,28 +4,71 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using Dictionary.Parser.Characters;
+
 namespace Dictionary.Parser
 {
     public class Filter
     {
+        public enum ObjectType
+        {
+            Character,
+            BreakStatements,
+            None
+        }
+
         // Variables
-        private List< Structures.Ranges > iCharacterRanges           = new List< Structures.Ranges >();
-        private List< Structures.Individuals > iCharacterIndividuals = new List< Structures.Individuals >();
+        private Allow iCharacters = new Allow();
+        private Allow iBreakStatements = new Allow();
         
         // Accessors
-        public int LengthOfRanges
+            // Characters
+        public int LengthOfCharactersRanges
         {
             get
             {
-                return iCharacterRanges.Count;
+                return iCharacters.LengthOfRanges;
             }
         }
 
-        public int LengthOfIndividuals
+        public int LengthOfCharactersIndividuals
         {
             get
             {
-                return iCharacterIndividuals.Count;
+                return iCharacters.LengthOfIndividuals;
+            }
+        }
+
+        public int LengthOfCharactersQueries
+        {
+            get
+            {
+                return iCharacters.LengthOfQueries;
+            }
+        }
+
+            // BreakStatements
+        public int LengthOfBreakRanges
+        {
+            get
+            {
+                return iBreakStatements.LengthOfRanges;
+            }
+        }
+
+        public int LengthOfBreakIndividuals
+        {
+            get
+            {
+                return iBreakStatements.LengthOfIndividuals;
+            }
+        }
+
+        public int LengthOfBreakQueries
+        {
+            get
+            {
+                return iBreakStatements.LengthOfQueries;
             }
         }
 
@@ -35,307 +78,214 @@ namespace Dictionary.Parser
 
         }
         
+        // Ranges
         public Filter( char Begin, 
                        char End, 
                        bool CaseSensative )
         {
-            AddRanges( Begin, End, 
-                       CaseSensative );
+            AddCharacters( Begin, End, 
+                           CaseSensative );
         }
 
+        public Filter( char Begin,
+                       char End,
+                       bool CaseSensative, 
+                       ObjectType Type )
+        {
+            switch( Type )
+            {
+                case ObjectType.Character:
+                        AddCharacters( Begin, End, 
+                                       CaseSensative );
+                    break;
+
+                case ObjectType.BreakStatements:
+                        AddBreakstatements( Begin, End, 
+                                            CaseSensative );
+                    break;
+
+                default:
+                    // None
+                    break;
+            }
+        }
+        
+        // Individual
         public Filter( char Individual, 
                        bool CaseSensative )
         {
-            AddIndividuals( Individual, 
-                            CaseSensative );
+            AddCharacters( Individual, 
+                           CaseSensative );
         }
 
-        // Primary Functions
-            // Add
-        private void AddIndividuals( Structures.Individuals AddIndividual )
+        public Filter( char Individual, 
+                       bool CaseSensative, 
+                       ObjectType Type )
         {
-            iCharacterIndividuals.Add( AddIndividual );
+            Add( Individual, 
+                 CaseSensative, 
+                 Type );
+        }
+
+
+        // Primary Functions
+            // Add Characters
+                // Individual
+        public void AddCharacters( StructureTypes.Individuals AddIndividual )
+        {
+            iCharacters.AddIndividuals( AddIndividual );
         }
         
-        public void AddIndividuals( char Individual, 
-                                    bool CaseSensative )
+        public void AddCharacters( char Individual, 
+                                   bool CaseSensative )
         {
-            Structures.Individuals Ivls = new Structures.Individuals();
+            StructureTypes.Individuals Ivls = new StructureTypes.Individuals();
 
             Ivls.Init( Individual, 
                        CaseSensative );
 
-            AddIndividuals( Ivls );
+            AddCharacters( Ivls );
         }
 
-        private void AddRanges( Structures.Ranges AddRange )
+                // Range
+        public void AddCharacters( StructureTypes.Ranges AddRange )
         {
-            iCharacterRanges.Add( AddRange );
+            iCharacters.AddRanges( AddRange );
         }
 
-        public void AddRanges( char Begin, 
-                               char End, 
-                               bool CaseSensative )
+        public void AddCharacters( char Begin, 
+                                   char End, 
+                                   bool CaseSensative )
         {
-            Structures.Ranges Rng = new Structures.Ranges();
+            StructureTypes.Ranges Rng = new StructureTypes.Ranges();
 
             Rng.Init( Begin, 
                       End, 
                       CaseSensative );
 
-            AddRanges( Rng );
+            AddCharacters( Rng );
+
         }
 
-                // Wrappers
-        public void Add( Structures.Individuals Individual )
+            // Add Breakstatements
+        public void AddBreakstatements( char Individual, 
+                                        bool CaseSensative )
         {
-            AddIndividuals( Individual );
+            StructureTypes.Individuals Ivls = new StructureTypes.Individuals();
+
+            Ivls.Init( Individual, 
+                       CaseSensative );
+
+            AddBreakstatements( Ivls );
+        }
+
+        public void AddBreakstatements( StructureTypes.Individuals Individual )
+        {
+            iBreakStatements.AddIndividuals( Individual );
+        }
+        
+        public void AddBreakstatements( char Begin, char End, 
+                                        bool CaseSensative )
+        {
+            StructureTypes.Ranges Range = new StructureTypes.Ranges();
+
+            Range.Init( Begin, End, 
+                        CaseSensative );
+
+            AddBreakstatements( Range );
+        }
+
+        public void AddBreakstatements( StructureTypes.Ranges Range )
+        {
+            iBreakStatements.AddRanges( Range );
+        }
+
+            // Wrappers
+                // Individual
+        public void Add( StructureTypes.Individuals Individual )
+        {
+            AddCharacters( Individual );
         }
 
         public void Add( char Character )
         {
-            AddIndividuals( Character, 
-                            false );
+            AddCharacters( Character, 
+                           false );
         }
         
         public void Add( char Character, 
                          bool Sensative )
         {
-            AddIndividuals( Character, 
-                            Sensative );
+            AddCharacters( Character, 
+                           Sensative );
         }
 
-        public void Add( Structures.Ranges Range )
+        public void Add( Char Individual, 
+                         bool CaseSensative,
+                         ObjectType Type )
         {
-            AddRanges( Range );
+
+            switch ( Type )
+            {
+                case ObjectType.Character:
+                        AddCharacters( Individual,
+                                       CaseSensative );
+                    break;
+
+                case ObjectType.BreakStatements:
+                        AddBreakstatements( Individual,
+                                            CaseSensative );
+                    break;
+
+                default:
+                        // None
+                    break;
+            }
+
+        }
+
+                // Ranges
+        public void Add( StructureTypes.Ranges Range )
+        {
+            AddCharacters( Range );
         }
 
         public void Add( char Begin, char End )
         {
-            AddRanges( Begin, End, 
-                       false );
+            AddCharacters( Begin, End, 
+                           false );
         }
 
         public void Add( char Begin, char End, 
                          bool Sensative )
         {
-            AddRanges( Begin, End, 
-                       Sensative );
-        }
-        
-        // Remove
-            // Indexes
-        public void RemoveRanges( int index )
-        {
-            iCharacterRanges.RemoveAt( index );
+            AddCharacters( Begin, End, 
+                           Sensative );
         }
 
-        public void RemoveIndividuals( int index )
+        public void Add( char Begin, char End,
+                         bool Sensative, 
+                         ObjectType Type )
         {
-            iCharacterIndividuals.RemoveAt( index );
-        }
-
-                // Character
-        public void RemoveRanges( char Character )
-        {
-
-            for( int index = ( LengthOfRanges - 1 );
-                     index >= 0;
-                     index -- )
+            switch( Type )
             {
+                case ObjectType.Character:
+                        AddCharacters( Begin, End, 
+                                       Sensative );
+                    break;
 
-                if( ( iCharacterRanges[index].Begin == Character ) || 
-                    ( iCharacterRanges[index].End == Character ) )
-                {
-                    iCharacterRanges.RemoveAt( index ); 
-                }
+                case ObjectType.BreakStatements:
+                        AddBreakstatements( Begin, End, 
+                                            Sensative );
+                    break;
 
+                case ObjectType.None:
+                        // None
+                    break;
             }
 
         }
 
-        public void RemoveRanges( char Begin, 
-                                  char End )
-        {
-
-            for( int index = ( LengthOfRanges - 1 ); 
-                     index >= 0; 
-                     index -- )
-            {
-
-                if ( ( iCharacterRanges[index].Begin == Begin ) && 
-                     ( iCharacterRanges[index].End == End ) )
-                {
-                    iCharacterRanges.RemoveAt( index );
-                }
-
-            }
-
-        }
-        
-        public void RemoveIndividuals( char Character )
-        {
-
-            for( int index = ( LengthOfIndividuals - 1 ); 
-                     index >= 0; 
-                     index -- )
-            {
-
-                if( iCharacterIndividuals[index].Character == Character )
-                {
-                    iCharacterIndividuals.RemoveAt( index );
-                }
-
-            }
-
-        }
-
-            // Clear
-        public void ClearIndividuals()
-        {
-            iCharacterIndividuals.Clear();
-        }
-
-        public void ClearRanges()
-        {
-            iCharacterRanges.Clear();
-        }
-
-        public void ClearBoth()
-        {
-            ClearIndividuals();
-            ClearRanges();
-        }
-
-        // Functions
-        public Boolean Run( char Character )
-        {
-            if ( isInsideRange( Character ) )
-                return true;
-
-            if ( isInsideIndividuals( Character ) )
-                return true;
-
-            return false;
-        }
-
-            // Character Range, inside x -> y
-        private Boolean isInsideRange( char Character )
-        {
-            bool sensative = false;
-
-            foreach( Structures.Ranges currentRng in iCharacterRanges )
-            {
-                sensative = currentRng.CaseSensative;
-
-                if( sensative )
-                {
-                    if ( isCharacterInsideRange( Character, 
-                                                 currentRng.Begin, 
-                                                 currentRng.End ) )
-                        return true;
-                }
-                else
-                {
-                    if ( insideRangeInsensative( Character, 
-                                                 currentRng.Begin, 
-                                                 currentRng.End ) )
-                        return true;
-                }
-
-            }
-
-            return false;
-        }
-
-            // Lowers Characters 
-        private Boolean insideRangeInsensative( char current, 
-                                                char begin, 
-                                                char end )
-        {
-            // Init variables
-            char lowerCurrent, 
-                 lowerBegin, lowerEnd;
-
-            // Lower Input
-            lowerCurrent = char.ToLower( current );
-
-            lowerBegin = char.ToLower( begin );
-            lowerEnd   = char.ToLower( end );
-
-            // Checks if it's inside boundry
-            if ( isCharacterInsideRange( lowerCurrent, 
-                                         lowerBegin, 
-                                         lowerEnd ) )
-                return true;
-
-            // if it isn't
-            return false;
-        }
-
-        private Boolean isCharacterInsideRange( char current,
-                                                char begin,
-                                                char end )
-        {
-            if ( begin <= current ||
-                 current >= end )
-                return true;
-
-            return false;
-        }
-
-        // Individual Characters
-        private Boolean isInsideIndividuals( char Character )
-        {
-            bool sensative = false;
-
-            foreach( Structures.Individuals Ind in iCharacterIndividuals )
-            {
-                sensative = Ind.CaseSensative;
-                
-                if ( sensative )
-                {
-                    if ( isCharactersEqual( Character, 
-                                            Ind.Character ) )
-                        return true;
-                }
-                else
-                {
-                    if ( inIndividualsInsensative( Character, 
-                                                   Ind.Character ) )
-                        return true;
-                }
-            }
-
-            return false;
-        }
-
-            // Lowers Characters
-        private Boolean inIndividualsInsensative( char current, 
-                                                  char character )
-        {
-            char lowerCurrent, 
-                 lowerCharacter;
-
-            lowerCurrent   = Char.ToLower( current );
-            lowerCharacter = Char.ToLower( character );
-
-            if ( isCharactersEqual( lowerCurrent, 
-                                    lowerCharacter ) )
-                return true;
-
-            return false;
-        }
-
-        private Boolean isCharactersEqual( char current, 
-                                           char character )
-        {
-            if ( current == character )
-                return true;
-
-            return false;
-        }
-        
     } // End Class
 
 } // End Namespace

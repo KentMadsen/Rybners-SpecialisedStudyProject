@@ -2,7 +2,7 @@
 
 namespace Dictionary.Parser
 {
-    public static class Structures
+    public static class StructureTypes
     {
         public struct Ranges
         {
@@ -85,6 +85,76 @@ namespace Dictionary.Parser
         } // Individuals
 
 
-    } // Class Structures
+        public struct Tokens
+        {
+            // Variables
+            private String Content;
+            private ListTypes.TokenTypes TokenType;
+
+            // Accessors
+            public String Token
+            {
+                get
+                {
+                    return Content;
+                }
+            }
+
+            public ListTypes.TokenTypes Type
+            {
+                get
+                {
+                    return TokenType;
+                }
+            }
+
+            // Functions
+            public void Init( String Token )
+            {
+                Content = Token;
+            }
+
+            public void Init( ListTypes.TokenTypes Type )
+            {
+                TokenType = Type;
+            }
+
+            public void Init( String Token, 
+                              ListTypes.TokenTypes Type )
+            {
+                Init( Token );
+                Init( Type );
+            }
+
+        } // Tokens
+
+        public struct Composite
+        {
+            private int[] TokensId;
+
+            // Functions
+            public void Init( int[] Ids )
+            {
+                TokensId = Ids;
+            }
+
+            public int[] ArrayIds
+            {
+                get
+                {
+                    return TokensId;
+                }
+            }
+        }
+
+    } 
+
+    public static class ListTypes
+    {
+        public enum TokenTypes
+        {
+            Word, Number, None
+        }
+    }
 
 } // End Namespace

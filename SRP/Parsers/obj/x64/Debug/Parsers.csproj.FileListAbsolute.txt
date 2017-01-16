@@ -1,1 +1,7 @@
 C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\Parsers\obj\x64\Debug\Parsers.csprojResolveAssemblyReference.cache
+C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\Parsers\bin\x64\Debug\Parsers.dll
+C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\Parsers\bin\x64\Debug\Parsers.pdb
+C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\Parsers\bin\x64\Debug\Library.dll
+C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\Parsers\bin\x64\Debug\Library.pdb
+C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\Parsers\obj\x64\Debug\Parsers.dll
+C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\Parsers\obj\x64\Debug\Parsers.pdb
