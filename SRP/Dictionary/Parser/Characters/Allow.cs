@@ -127,7 +127,14 @@ namespace Dictionary.Parser.Characters
 
         public void RemoveRanges( int x )
         {
+            if( x > LengthOfRanges )
+            {
+                // Error
 
+                return;
+            }
+
+            iRanges.RemoveAt( x );
         }
 
             // Individuals
@@ -155,12 +162,14 @@ namespace Dictionary.Parser.Characters
 
         public void RemoveIndividuals( int x )
         {
-
             if( x > LengthOfIndividuals )
             {
-                
+                // Error
+
+                return;
             }
 
+            iIndividuals.RemoveAt( x );
         }
 
 
