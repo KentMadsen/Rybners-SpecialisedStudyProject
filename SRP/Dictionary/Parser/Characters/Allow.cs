@@ -17,15 +17,15 @@ namespace Dictionary.Parser.Characters
             None
         }
 
-        private List< StructureTypes.Ranges > iCharacterRanges = new List< StructureTypes.Ranges >();
-        private List< StructureTypes.Individuals > iCharacterIndividuals = new List< StructureTypes.Individuals >();
+        private List< StructureTypes.Ranges > iRanges = new List< StructureTypes.Ranges >();
+        private List< StructureTypes.Individuals > iIndividuals = new List< StructureTypes.Individuals >();
 
         // Accessor
         public int LengthOfRanges
         {
             get
             {
-                return iCharacterRanges.Count;
+                return iRanges.Count;
             }
         }
 
@@ -33,7 +33,7 @@ namespace Dictionary.Parser.Characters
         {
             get
             {
-                return iCharacterIndividuals.Count;
+                return iIndividuals.Count;
             }
         }
 
@@ -83,7 +83,8 @@ namespace Dictionary.Parser.Characters
             RemoveIndividuals( Individual );
         }
 
-        public void Remove( int x, ObjectType type )
+        public void Remove( int x, 
+                            ObjectType type )
         {
             switch( type )
             {
@@ -105,7 +106,7 @@ namespace Dictionary.Parser.Characters
             // Ranges
         public void AddRanges( StructureTypes.Ranges Range )
         {
-            iCharacterRanges.Add( Range );
+            iRanges.Add( Range );
         }
 
         public void AddRanges( char Begin, char End, 
@@ -121,7 +122,7 @@ namespace Dictionary.Parser.Characters
         
         public void RemoveRanges( StructureTypes.Ranges Range )
         {
-            iCharacterRanges.Remove( Range );
+            iRanges.Remove( Range );
         }
 
         public void RemoveRanges( int x )
@@ -144,16 +145,21 @@ namespace Dictionary.Parser.Characters
 
         public void AddIndividuals( StructureTypes.Individuals Individual )
         {
-            iCharacterIndividuals.Add( Individual );
+            iIndividuals.Add( Individual );
         }
 
         public void RemoveIndividuals( StructureTypes.Individuals Individual )
         {
-            iCharacterIndividuals.Remove( Individual );
+            iIndividuals.Remove( Individual );
         }
 
         public void RemoveIndividuals( int x )
         {
+
+            if( x > LengthOfIndividuals )
+            {
+                
+            }
 
         }
 
@@ -173,7 +179,7 @@ namespace Dictionary.Parser.Characters
         public bool isInsideRanges( char Character )
         {
 
-            foreach( StructureTypes.Ranges Range in iCharacterRanges )
+            foreach( StructureTypes.Ranges Range in iRanges )
             {
 
                 if( Range.CaseSensative )
@@ -218,7 +224,7 @@ namespace Dictionary.Parser.Characters
         public bool isInsideIndividuals( char Character )
         {
 
-            foreach( StructureTypes.Individuals Individual in iCharacterIndividuals )
+            foreach( StructureTypes.Individuals Individual in iIndividuals )
             {
                 if( Individual.CaseSensative )
                 {
@@ -246,8 +252,8 @@ namespace Dictionary.Parser.Characters
 
             // Routines
                 //
-        private bool isEqualsTo( char A, 
-                                 char B )
+        public static bool isEqualsTo( char A, 
+                                       char B )
         {
             if ( A == B )
                 return true;
@@ -256,8 +262,8 @@ namespace Dictionary.Parser.Characters
         }
 
                 //
-        private bool isInsideRange( char A, char B, 
-                                    char C )
+        public static bool isInsideRange( char A, char B, 
+                                          char C )
         {
             if ( A <= C || C >= B )
                 return true;
