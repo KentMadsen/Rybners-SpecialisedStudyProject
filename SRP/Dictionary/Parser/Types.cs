@@ -12,6 +12,8 @@ namespace Dictionary.Parser
 
             private Boolean iCaseSensative;
 
+            private int iPriority;
+
             // Accessors
             public Char Begin
             {
@@ -29,6 +31,14 @@ namespace Dictionary.Parser
                 }
             }
 
+            public int Priority
+            {
+                get
+                {
+                    return iPriority;
+                }
+            }
+
             public Boolean CaseSensative
             {
                 get
@@ -38,14 +48,40 @@ namespace Dictionary.Parser
             }
 
             // Functions
-            public void Init( char begin,
-                              char end,
+            public void Init( char begin, char end,
                               bool caseSensative )
             {
+                ResetPriority();
+
                 iBegin = begin;
-                iEnd = end;
+                iEnd   = end;
 
                 iCaseSensative = caseSensative;
+            }
+
+            public void Init( char begin, char end, 
+                              bool caseSensative, 
+                              int found )
+            {
+                Init( begin, end, 
+                      caseSensative );
+
+                iPriority = found;
+            }
+
+            public void IncreasePriority()
+            {
+                iPriority++;
+            }
+
+            public void DecreasePriority()
+            {
+                iPriority--;
+            }
+
+            public void ResetPriority()
+            {
+                iPriority = 0;
             }
 
         } // Ranges
@@ -57,12 +93,22 @@ namespace Dictionary.Parser
 
             private Boolean iCaseSensative;
 
+            private int iPriority;
+
             // Accessors
             public Char Character
             {
                 get
                 {
                     return iChar;
+                }
+            }
+
+            public int Priority
+            {
+                get
+                {
+                    return iPriority;
                 }
             }
 
@@ -78,8 +124,35 @@ namespace Dictionary.Parser
             public void Init( char Character, 
                               bool Sensative )
             {
-                iChar = Character;
+                ResetPriority();
+
+                iChar  = Character;
                 iCaseSensative = Sensative;
+            }
+
+            public void Init( char Character, 
+                              bool Sensative, 
+                              int Found )
+            {
+                Init( Character, 
+                      Sensative );
+
+                iPriority = Found;
+            }
+
+            public void IncreasePriority()
+            {
+                iPriority++;
+            }
+
+            public void DecreasePriority()
+            {
+                iPriority--;
+            }
+
+            public void ResetPriority()
+            {
+                iPriority = 0;
             }
 
         } // Individuals
@@ -87,6 +160,7 @@ namespace Dictionary.Parser
 
         public struct Tokens
         {
+
             // Variables
             private String Content;
             private ListTypes.TokenTypes TokenType;
@@ -125,7 +199,7 @@ namespace Dictionary.Parser
                 Init( Token );
                 Init( Type );
             }
-
+            
         } // Tokens
 
         public struct Composite
@@ -140,11 +214,14 @@ namespace Dictionary.Parser
 
             public int[] ArrayIds
             {
+
                 get
                 {
                     return TokensId;
                 }
+
             }
+
         }
 
     } 
@@ -153,7 +230,9 @@ namespace Dictionary.Parser
     {
         public enum TokenTypes
         {
-            Word, Number, None
+            Word,
+            Number,
+            None
         }
     }
 

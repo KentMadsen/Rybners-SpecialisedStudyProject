@@ -17,6 +17,21 @@ namespace Dictionary.Parser
             None
         }
 
+        public enum FilterType
+        {
+            Valid,
+            Invalid,
+            Break,
+            None
+        }
+
+        public struct FilterObject
+        {
+            private FilterType Type;
+            private char Character;
+
+        }
+
         // Variables
         private Allow iCharacters = new Allow();
         private Allow iBreakStatements = new Allow();
@@ -285,6 +300,8 @@ namespace Dictionary.Parser
             }
 
         }
+
+
 
     } // End Class
 
