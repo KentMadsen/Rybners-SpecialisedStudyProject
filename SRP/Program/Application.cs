@@ -28,6 +28,7 @@ namespace Program
     // States
         private Boolean ErrorOccured = false;
         
+        
 //---------------------------------------------------------------------------->
 // Constructors
         public Application()
