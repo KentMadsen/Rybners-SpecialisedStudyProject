@@ -15,7 +15,7 @@ using System.IO;
    Description : 
 */
 
-namespace Libraries.IO
+namespace Library.IO
 {
     public class ListSearch : Abstracts.RecursiveDirectorySearch
     {

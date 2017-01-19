@@ -22,7 +22,7 @@ using System.Threading.Tasks;
    Description : 
 */
 
-namespace Libraries.IO.Abstracts
+namespace Library.IO.Abstracts
 {
     public abstract class RecursiveDirectorySearch
     {
