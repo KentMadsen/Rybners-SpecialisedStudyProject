@@ -93,7 +93,7 @@ namespace SRP
                         }
                         else
                         {
-                            Console.WriteLine("Locked");
+                            Console.WriteLine( "Locked" );
                         }
 
                         break;
@@ -168,8 +168,7 @@ namespace SRP
                         }
 
                         break;
-
-                    
+                        
                         // Bryder loopen
                     case "exit":
                             work = false;
