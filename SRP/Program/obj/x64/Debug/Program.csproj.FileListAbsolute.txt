@@ -4,5 +4,3 @@ C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\Program\bin\x64\Debug\Pro
 C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\Program\obj\x64\Debug\Program.csprojResolveAssemblyReference.cache
 C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\Program\obj\x64\Debug\Program.exe
 C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\Program\obj\x64\Debug\Program.pdb
-C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\Program\bin\x64\Debug\Dictionary.dll
-C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\Program\bin\x64\Debug\Dictionary.pdb

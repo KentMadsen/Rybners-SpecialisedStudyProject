@@ -1,5 +1,0 @@
-C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\Database\bin\x64\Debug\Database.dll
-C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\Database\bin\x64\Debug\Database.pdb
-C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\Database\obj\x64\Debug\Database.csprojResolveAssemblyReference.cache
-C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\Database\obj\x64\Debug\Database.dll
-C:\Users\Fract\Kode\Projects\StudieretningsProjekt\SRP\Database\obj\x64\Debug\Database.pdb
